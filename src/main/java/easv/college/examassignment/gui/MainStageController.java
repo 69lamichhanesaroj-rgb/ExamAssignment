@@ -128,7 +128,14 @@ public class MainStageController {
     }
 
     @FXML
-    void deleteCategoryActionBtn(ActionEvent event) {
+    void deleteCategoryActionBtn(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/deleteCategory-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Delete Category");
+        stage.setScene(scene);
+        stage.show();
 
     }
 
