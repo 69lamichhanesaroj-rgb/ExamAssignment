@@ -51,7 +51,7 @@ public class Movie {
         this.fileLink = fileLink;
     }
 
-    /* This part might be usable once we start working on the filter stuff
+    /* This part might be usable once we start working on the filter stuff, ofc depending on how we do it
     @Override
     public boolean filterEquals(Object object) {
         if (this == object) return true;
