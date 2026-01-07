@@ -28,7 +28,7 @@ public class MainStageController {
     private Button addCategoryBtn;
 
     @FXML
-    private Button addEditMovieBtn;
+    private Button addMovieBtn;
 
     @FXML
     private TableColumn<?, ?> categoryColoumn;
@@ -37,12 +37,16 @@ public class MainStageController {
     private ListView<?> categoryList;
 
     @FXML
+    private Button deleteMovieBtn;
+
+    @FXML
+    private Button editMovieBtn;
+
+    @FXML
     private Button deleteCategoryBtn;
     @FXML
     private Button closeMainStage;
 
-    @FXML
-    private CheckBox favMovie;
 
     @FXML
     private TableColumn<?, ?> lastviewColoumn;
@@ -103,15 +107,39 @@ public class MainStageController {
     }
 
     @FXML
-    void addEditMovieActionBtn(ActionEvent event) throws IOException {
+    void addMovieActionBtn(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/newMovie-view.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         Scene scene = new Scene(root);
-        stage.setTitle("Add / Edit Movie");
+        stage.setTitle("Add Movie");
         stage.setScene(scene);
         stage.show();
 
+
+    }
+
+    @FXML
+    void deleteMovieActionBtn(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/deleteMovie-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Delete Movie");
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    void editMovieActionBtn(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/editMovie-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Edit Movie");
+        stage.setScene(scene);
+        stage.show();
 
     }
 
@@ -139,10 +167,7 @@ public class MainStageController {
 
     }
 
-    @FXML
-    void favMovieActionBtn(MouseEvent event) {
 
-    }
 
     @FXML
     void radioBtn2Action(MouseEvent event) {
