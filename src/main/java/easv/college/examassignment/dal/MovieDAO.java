@@ -9,11 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDAO {
-    private ConnectionManager connectionManager;
-
-    public MovieDAO() {
-        this.connectionManager = connectionManager;
-    }
+    ConnectionManager conMan = new ConnectionManager();
 
     /**
      * Used to create a new movie in the database
@@ -21,8 +17,8 @@ public class MovieDAO {
     public int createMovie(Movie movie) throws SQLException {
         String sql = "INSERT INTO Movie (name, userRating, imdbRating, fileLink, lastView) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+        try (Connection con = conMan.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             stmt.setString(1, movie.getName());
             stmt.setFloat(2, movie.getUserRating() != null ? movie.getUserRating() : 0);
             stmt.setFloat(3, movie.getImdbRating() != null ? movie.getImdbRating() : 0);
@@ -51,8 +47,8 @@ public class MovieDAO {
     public Movie getMovieById(int id) throws SQLException {
         String sql = "SELECT * FROM Movie WHERE id = ?";
 
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql)){
+        try (Connection con = conMan.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)){
             stmt.setInt(1, id);
 
             try (ResultSet rs = stmt.executeQuery()){
@@ -70,8 +66,8 @@ public class MovieDAO {
     public void UpdateMovie(Movie movie) throws SQLException {
         String sql = "UPDATE Movie SET name = ?, userRating = ?, imdbRating = ?, fileLink = ?, lastView = ? WHERE id = ?";
 
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql)){
+        try (Connection con = conMan.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)){
 
             stmt.setString(1, movie.getName());
             stmt.setFloat(2, movie.getUserRating() != null ? movie.getUserRating() : 0);
@@ -90,8 +86,8 @@ public class MovieDAO {
     public void DeleteMovie(int id) throws SQLException {
         String sql = "DELETE FROM Movie WHERE id = ?";
 
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql)){
+        try (Connection con = conMan.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)){
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -107,8 +103,8 @@ public class MovieDAO {
         String sql = "SELECT * FROM Movie ORDER BY NAME";
         List<Movie> movies = new ArrayList<>();
 
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql);
+        try (Connection con = conMan.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()){
 
             while (rs.next()) {
@@ -171,8 +167,8 @@ public class MovieDAO {
 
         List<MovieWithCategories> results = new ArrayList<>();
 
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql.toString())) {
+        try (Connection con = conMan.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql.toString())) {
 
             int paramIndex = 1;
 
