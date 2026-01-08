@@ -2,13 +2,15 @@ package easv.college.examassignment.bll;
 
 import easv.college.examassignment.dal.CatMovieDAO;
 import easv.college.examassignment.be.*;
+
+import java.io.IOException;
 import java.util.List;
 
 public class Logic
 {
     private final CatMovieDAO dao;
 
-    public Logic()
+    public Logic() throws IOException
     {
         dao = new CatMovieDAO();
     }
