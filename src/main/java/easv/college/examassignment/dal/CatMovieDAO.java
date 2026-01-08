@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CatMovieDAO {
-    ConnectionManager conMan;
-    public CatMovieDAO() throws IOException {
-        conMan = new ConnectionManager();
-    }
+    ConnectionManager conMan = new ConnectionManager();
 
     public List<CatMovie> getCatMovies() throws SQLException {
         List<CatMovie> catMovie = new ArrayList<>();
