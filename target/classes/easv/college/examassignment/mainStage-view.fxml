@@ -49,7 +49,7 @@
             <Font size="21.0" />
          </font>
       </Button>
-      <Button fx:id="deleteCategoryBtn" layoutX="1068.0" layoutY="536.0" mnemonicParsing="false" onAction="#deleteCategoryActionBtn" prefHeight="46.0" prefWidth="183.0" style="-fx-background-color: #e3242b;" text="Delete Category" textFill="WHITE">
+      <Button fx:id="deleteCategoryBtn" layoutX="1073.0" layoutY="536.0" mnemonicParsing="false" onAction="#deleteCategoryActionBtn" prefHeight="46.0" prefWidth="178.0" style="-fx-background-color: #e3242b;" text="Delete Category" textFill="WHITE">
          <font>
             <Font size="21.0" />
          </font>
