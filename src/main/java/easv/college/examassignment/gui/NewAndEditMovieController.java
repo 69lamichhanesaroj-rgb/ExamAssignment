@@ -16,7 +16,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class NewAndEditMovieController implements Initializable {
-    FileChooser fileChooser = new FileChooser();
 
     @FXML
     private TextField IMBDRating;
@@ -45,19 +44,19 @@ public class NewAndEditMovieController implements Initializable {
 
     @FXML
     void chooseFilePathActionBtn(ActionEvent event) {
-        try {
-            fileChooser.setInitialDirectory(new File(NewAndEditMovieController.class.getResource("/easv/college/examassignment/MoviesAssets").toURI()));
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        File file = fileChooser.showOpenDialog(null);
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+
+
+        File file = fileChooser.showOpenDialog(cancelBtn.getScene().getWindow());
         filePath.setText(file.getAbsolutePath());
 
     }
 
     @FXML
     void saveMovieActionBtn(ActionEvent event) {
-        String title = movieTitle.getText();
+        String title = movieTitle.getText().trim();
         Float ratingIMBD = Float.parseFloat(IMBDRating.getText());
         Float ratingUser = Float.parseFloat(userRating.getText());
         String catMovie = comboboxCategory.getSelectionModel().getSelectedItem().toString();

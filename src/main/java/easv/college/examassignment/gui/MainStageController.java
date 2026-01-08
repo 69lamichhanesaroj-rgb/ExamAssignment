@@ -13,13 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -39,7 +33,7 @@ public class MainStageController implements Initializable {
     private Button addEditMovieBtn;
 
     @FXML
-    private TableColumn<CatMovie,Category> catMovieColoumn;
+    private TableColumn<CatMovie, Category> catMovieColoumn;
 
     @FXML
     private ListView<Category> categoryList;
@@ -94,7 +88,7 @@ public class MainStageController implements Initializable {
     private Button searchMovie;
 
     @FXML
-    private TableColumn<Movie,String> title;
+    private TableColumn<Movie, String> title;
 
     @FXML
     private TableColumn<?, ?> userRatingColoumn;
@@ -113,9 +107,15 @@ public class MainStageController implements Initializable {
         categoryLibrary = FXCollections.observableArrayList();
 
         movieTitleColoumn.setItems(movieLibrary);
+        categoryList.setItems(categoryLibrary);
+      /*  try {
+            categoryLibrary.addAll(logic.getAllCategories()); // load from db
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         //catMovieColoumn.setItems(catMovieList);
 
-
+       */
 
 
 
@@ -124,39 +124,33 @@ public class MainStageController implements Initializable {
 
     @FXML
     void addCategoryActionBtn(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/addCategory-view.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setTitle("Add Category");
-        stage.setScene(scene);
-        stage.show();
+
+        openWindow("addCategory-view.fxml", "Add Category");
 
 
     }
 
+
     @FXML
     void addEditMovieActionBtn(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/newAndEditMovie-view.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setTitle("Add Movie");
-        stage.setScene(scene);
-        stage.show();
+
+        openWindow("newAndEditMovie-view.fxml", "Add Movie");
 
 
     }
 
     @FXML
     void deleteMovieActionBtn(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/deleteMovie-view.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setTitle("Delete Movie");
-        stage.setScene(scene);
-        stage.show();
+        Movie selectedMovie = movieTitleColoumn.getSelectionModel().getSelectedItem();
+        if (selectedMovie == null) {
+            showAlert("Please select a movie to delete");
+            return;
+        }
+
+        openWindow("deleteMovie-view.fxml", "Delete Movie");
+        DeleteMovieController deleteMovieController = new DeleteMovieController();
+        deleteMovieController.setMovieToBeDeleted(selectedMovie);
+        deleteMovieController.setMovieLibrary(movieLibrary);
 
     }
 
@@ -175,16 +169,8 @@ public class MainStageController implements Initializable {
 
     @FXML
     void deleteCategoryActionBtn(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/deleteCategory-view.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setTitle("Delete Category");
-        stage.setScene(scene);
-        stage.show();
-
+        openWindow("deleteCategory-view.fxml", "Delete Category");
     }
-
 
 
     @FXML
@@ -231,6 +217,30 @@ public class MainStageController implements Initializable {
     void searchActionBtn(MouseEvent event) {
 
     }
+
+    private void openWindow(String fxmlFileName, String windowTitle) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/%s".formatted(fxmlFileName)));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle(windowTitle);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void loadCategories() throws IOException {
+        ObservableList<Category> categories = FXCollections.observableArrayList();
+        categoryLibrary = FXCollections.observableArrayList();
+        categoryList.setItems(categoryLibrary);
+    }
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
 
 }
