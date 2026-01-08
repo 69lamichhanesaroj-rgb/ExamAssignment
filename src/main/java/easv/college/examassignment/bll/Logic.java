@@ -10,7 +10,7 @@ public class Logic
 {
     private final CatMovieDAO dao;
 
-    public Logic() throws IOException
+    public Logic()
     {
         dao = new CatMovieDAO();
     }
