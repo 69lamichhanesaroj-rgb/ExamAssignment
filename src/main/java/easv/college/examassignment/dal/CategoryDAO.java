@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO {
-    ConnectionManager conMan;
-    public CategoryDAO() throws IOException {
-        conMan = new ConnectionManager();
-    }
+    ConnectionManager conMan = new ConnectionManager();
 
     public List<Category> getCategories() throws SQLException {
         List<Category> categories = new ArrayList<>();
