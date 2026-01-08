@@ -11,7 +11,7 @@ import java.util.List;
 public class MovieDAO {
     private ConnectionManager connectionManager;
 
-    public MovieDAO(ConnectionManager connectionManager) {
+    public MovieDAO() {
         this.connectionManager = connectionManager;
     }
 
