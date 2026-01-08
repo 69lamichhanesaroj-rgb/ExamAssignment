@@ -1,22 +1,14 @@
 package easv.college.examassignment.be;
 
 public class CatMovie {
-    private Integer id;
     private Integer categoryId;
     private Integer movieId;
 
-    public CatMovie(Integer id, Integer categoryId, Integer movieId) {
-        this.id = id;
+    public CatMovie(Integer categoryId, Integer movieId) {
         this.categoryId = categoryId;
         this.movieId = movieId;
     }
 
-    public Integer getId() {
-        return id;
-    }
-    public void setId(Integer id) {
-        this.id = id;
-    }
     public Integer getCategoryId() {
         return categoryId;
     }
