@@ -1,18 +1,18 @@
 package easv.college.examassignment.bll;
 
-import easv.college.examassignment.dal.CatMovieDAO;
 import easv.college.examassignment.be.*;
+import easv.college.examassignment.dal.DAOManager;
 
 import java.io.IOException;
 import java.util.List;
 
 public class Logic
 {
-    private final CatMovieDAO dao;
+    private final DAOManager dao;
 
     public Logic()
     {
-        dao = new CatMovieDAO();
+        dao = new DAOManager();
     }
 
     public List<Movie> getAllMovies() throws Exception
@@ -22,17 +22,17 @@ public class Logic
 
     public void createMovie(Movie movie) throws Exception
     {
-
+        dao.getMovieDAO().createMovie(movie);
     }
 
     public void updateMovie(Movie movie) throws Exception
     {
-
+        dao.getMovieDAO().UpdateMovie(movie);
     }
 
     public void deleteMovie(Movie movie) throws Exception
     {
-
+        dao.getMovieDAO().DeleteMovie();
     }
 
     public List<Category> getAllCategories() throws Exception
@@ -42,7 +42,7 @@ public class Logic
 
     public void createCategory(Category category) throws Exception
     {
-
+        dao.getCategoryDAO().addCategory();
     }
 
     public void updateCategory(Category category) throws Exception
@@ -67,6 +67,6 @@ public class Logic
 
     public void addCategoryToMovie(Category category) throws Exception
     {
-
+        dao.getCatMovieDAO().addCatMovie();
     }
 }
