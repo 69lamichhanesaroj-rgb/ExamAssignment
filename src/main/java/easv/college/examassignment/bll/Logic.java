@@ -17,7 +17,7 @@ public class Logic
 
     public List<Movie> getAllMovies() throws Exception
     {
-        return null;
+        return dao.getMovieDAO().getAllMovies();
     }
 
     public void createMovie(Movie movie) throws Exception
@@ -37,25 +37,25 @@ public class Logic
 
     public List<Category> getAllCategories() throws Exception
     {
-        return null;
+        return dao.getCategoryDAO().getCategories();
     }
 
     public void createCategory(Category category) throws Exception
     {
-        dao.getCategoryDAO().addCategory();
+        dao.getCategoryDAO().addCategory(category);
     }
 
     public void updateCategory(Category category) throws Exception
     {
-
+        dao.getCategoryDAO().UpdateCategory(category);
     }
 
     public void deleteCategory(Category category) throws Exception
     {
-
+        dao.getCategoryDAO().DeleteCategory();
     }
 
-    public List<Movie> filterMovies(String query) throws Exception
+    public List<MovieWithCategories> filterMovies(String query) throws Exception
     {
         return null;
     }
