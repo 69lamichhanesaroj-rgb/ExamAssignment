@@ -14,17 +14,21 @@ public class ConnectionManager {
     private static final String Connection = "config/config.settings";
     private SQLServerDataSource dataSource;
 
-    public ConnectionManager() throws IOException
+    public ConnectionManager()
     {
-        Properties databaseProperties = new Properties();
-        databaseProperties.load(new FileInputStream(new File(Connection)));
-        dataSource = new SQLServerDataSource();
-        dataSource.setServerName(databaseProperties.getProperty("Server"));
-        dataSource.setDatabaseName(databaseProperties.getProperty("Database"));
-        dataSource.setUser(databaseProperties.getProperty("User"));
-        dataSource.setPassword(databaseProperties.getProperty("Password"));
-        dataSource.setPortNumber(1433);
-        dataSource.setTrustServerCertificate(true);
+        try {
+            Properties databaseProperties = new Properties();
+            databaseProperties.load(new FileInputStream(new File(Connection)));
+            dataSource = new SQLServerDataSource();
+            dataSource.setServerName(databaseProperties.getProperty("Server"));
+            dataSource.setDatabaseName(databaseProperties.getProperty("Database"));
+            dataSource.setUser(databaseProperties.getProperty("User"));
+            dataSource.setPassword(databaseProperties.getProperty("Password"));
+            dataSource.setPortNumber(1433);
+            dataSource.setTrustServerCertificate(true);
+        } catch (IOException e) {
+            System.err.println("Error connecting to database: " + e.getMessage());
+        }
     }
     public Connection getConnection() throws SQLServerException {
         return dataSource.getConnection();

@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO {
-    ConnectionManager conMan;
-    public CategoryDAO() throws IOException {
-        conMan = new ConnectionManager();
-    }
+    ConnectionManager conMan = new ConnectionManager();
 
     public List<Category> getCategories() throws SQLException {
         List<Category> categories = new ArrayList<>();
@@ -30,14 +27,28 @@ public class CategoryDAO {
         return categories;
     }
 
-    public void addCategory(String category) throws SQLException {
+    public void addCategory(Category category) throws SQLException {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("INSERT INTO Category (name) VALUES (?)");
-            stmt.setString(1, category);
+            stmt.setString(1, category.getName());
             stmt.executeUpdate();
         }
         catch (SQLException e) {
             System.err.println("Error adding category: " + e.getMessage());
         }
+    }
+
+    public void DeleteCategory(Category category) throws SQLException {
+        try (Connection con = conMan.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement("DELETE Category WHERE id = ?");
+            stmt.setInt(1, category.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error deleting category: " + e.getMessage());
+        }
+    }
+
+    public void UpdateCategory(Category category) {
+
     }
 }
