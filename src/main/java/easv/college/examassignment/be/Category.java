@@ -31,13 +31,11 @@ public class Category {
         if (!(object instanceof Category category)) return false;
         return Objects.equals(id, category.id);
     }
-
+     */
 
     @Override
     public String toString() {
-        return (insert whatever we need)
+        return name;
     }
-
-     */
 
 }
