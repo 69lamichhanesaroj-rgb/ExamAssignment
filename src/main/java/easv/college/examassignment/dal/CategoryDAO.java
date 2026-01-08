@@ -38,10 +38,10 @@ public class CategoryDAO {
         }
     }
 
-    public void DeleteCategory(int id) throws SQLException {
+    public void DeleteCategory(Category category) throws SQLException {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("DELETE Category WHERE id = ?");
-            stmt.setInt(1, id);
+            stmt.setInt(1, category.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error deleting category: " + e.getMessage());

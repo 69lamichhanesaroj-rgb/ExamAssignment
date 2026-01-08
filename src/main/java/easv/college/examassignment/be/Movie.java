@@ -1,6 +1,6 @@
 package easv.college.examassignment.be;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Movie {
     private Integer id;
@@ -44,7 +44,7 @@ public class Movie {
     }
     public Float getUserRating() {return userRating;}
     public void setUserRating(Float userRating) {this.userRating = userRating;}
-    public String getLastView() {
+    public Date getLastView() {
         return lastView;
     }
     public void setLastView(Date lastView) {this.lastView = lastView;}

@@ -17,12 +17,12 @@ public class Logic
 
     public List<Movie> getAllMovies() throws Exception
     {
-        return dao.getMovieDAO().getAllMovies();
+        return dao.getMovieDAO().getMovies();
     }
 
     public void createMovie(Movie movie) throws Exception
     {
-        dao.getMovieDAO().createMovie(movie);
+        dao.getMovieDAO().AddMovie(movie);
     }
 
     public void updateMovie(Movie movie) throws Exception
@@ -32,7 +32,7 @@ public class Logic
 
     public void deleteMovie(Movie movie) throws Exception
     {
-        dao.getMovieDAO().DeleteMovie();
+        dao.getMovieDAO().DeleteMovie(movie);
     }
 
     public List<Category> getAllCategories() throws Exception
@@ -52,7 +52,7 @@ public class Logic
 
     public void deleteCategory(Category category) throws Exception
     {
-        dao.getCategoryDAO().DeleteCategory();
+        dao.getCategoryDAO().DeleteCategory(category);
     }
 
     public List<MovieWithCategories> filterMovies(String query) throws Exception
@@ -63,10 +63,5 @@ public class Logic
     public List<Category> filterCategory(Category category) throws Exception
     {
         return null;
-    }
-
-    public void addCategoryToMovie(Category category) throws Exception
-    {
-        dao.getCatMovieDAO().addCatMovie();
     }
 }
