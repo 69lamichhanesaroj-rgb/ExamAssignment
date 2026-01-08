@@ -27,10 +27,10 @@ public class CategoryDAO {
         return categories;
     }
 
-    public void addCategory(String category) throws SQLException {
+    public void addCategory(Category category) throws SQLException {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("INSERT INTO Category (name) VALUES (?)");
-            stmt.setString(1, category);
+            stmt.setString(1, category.getName());
             stmt.executeUpdate();
         }
         catch (SQLException e) {
