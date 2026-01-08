@@ -1,13 +1,19 @@
 package easv.college.examassignment.gui;
 
 import easv.college.examassignment.HelloApplication;
+import easv.college.examassignment.be.CatMovie;
+import easv.college.examassignment.be.Category;
+import easv.college.examassignment.be.Movie;
+import easv.college.examassignment.bll.Logic;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -18,8 +24,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainStageController {
+public class MainStageController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> IMDBRatingColoumn;
@@ -28,19 +36,17 @@ public class MainStageController {
     private Button addCategoryBtn;
 
     @FXML
-    private Button addMovieBtn;
+    private Button addEditMovieBtn;
 
     @FXML
-    private TableColumn<?, ?> categoryColoumn;
+    private TableColumn<CatMovie,Category> catMovieColoumn;
 
     @FXML
-    private ListView<?> categoryList;
+    private ListView<Category> categoryList;
 
     @FXML
     private Button deleteMovieBtn;
 
-    @FXML
-    private Button editMovieBtn;
 
     @FXML
     private Button deleteCategoryBtn;
@@ -52,7 +58,7 @@ public class MainStageController {
     private TableColumn<?, ?> lastviewColoumn;
 
     @FXML
-    private TableView<?> movieTitleColoumn;
+    private TableView<Movie> movieTitleColoumn;
 
     @FXML
     private RadioButton rating2;
@@ -88,10 +94,33 @@ public class MainStageController {
     private Button searchMovie;
 
     @FXML
-    private TableColumn<?, ?> title;
+    private TableColumn<Movie,String> title;
 
     @FXML
     private TableColumn<?, ?> userRatingColoumn;
+
+    private Logic logic;
+    private ObservableList<Movie> movieLibrary;
+    private ObservableList<CatMovie> catMovieList; // selected catedgory to the specific movie
+    private ObservableList<Category> categoryLibrary;
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        logic = new Logic();
+        movieLibrary = FXCollections.observableArrayList();
+        catMovieList = FXCollections.observableArrayList();
+        categoryLibrary = FXCollections.observableArrayList();
+
+        movieTitleColoumn.setItems(movieLibrary);
+        //catMovieColoumn.setItems(catMovieList);
+
+
+
+
+
+
+    }
 
     @FXML
     void addCategoryActionBtn(ActionEvent event) throws IOException {
@@ -107,8 +136,8 @@ public class MainStageController {
     }
 
     @FXML
-    void addMovieActionBtn(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/newMovie-view.fxml"));
+    void addEditMovieActionBtn(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/newAndEditMovie-view.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         Scene scene = new Scene(root);
@@ -131,17 +160,6 @@ public class MainStageController {
 
     }
 
-    @FXML
-    void editMovieActionBtn(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/editMovie-view.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setTitle("Edit Movie");
-        stage.setScene(scene);
-        stage.show();
-
-    }
 
     @FXML
     void clearActionBtn(ActionEvent event) {
@@ -213,5 +231,6 @@ public class MainStageController {
     void searchActionBtn(MouseEvent event) {
 
     }
+
 
 }

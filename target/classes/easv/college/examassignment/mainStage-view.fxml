@@ -35,11 +35,11 @@
           <TableColumn fx:id="title" prefWidth="278.0" text="Title" />
             <TableColumn fx:id="IMDBRatingColoumn" prefWidth="170.0" text="IMDB Rating" />
             <TableColumn fx:id="userRatingColoumn" prefWidth="151.0" text="User Rating" />
-            <TableColumn fx:id="categoryColoumn" prefWidth="149.0" text="Categories" />
+            <TableColumn fx:id="catMovieColoumn" prefWidth="149.0" text="Categories" />
             <TableColumn fx:id="lastviewColoumn" prefWidth="188.0" text="Last View" />
         </columns>
       </TableView>
-      <Button fx:id="addMovieBtn" layoutX="393.0" layoutY="537.0" mnemonicParsing="false" onAction="#addMovieActionBtn" prefHeight="46.0" prefWidth="131.0" style="-fx-background-color: #e3242b;" text="Add Movie" textFill="WHITE">
+      <Button fx:id="addEditMovieBtn" layoutX="393.0" layoutY="537.0" mnemonicParsing="false" onAction="#addEditMovieActionBtn" prefHeight="46.0" prefWidth="189.0" style="-fx-background-color: #e3242b;" text="Add / Edit Movie" textFill="WHITE">
          <font>
             <Font size="21.0" />
          </font>
@@ -108,11 +108,6 @@
          </font>
       </RadioButton>
       <Button fx:id="clearActionBtn" layoutX="286.0" layoutY="537.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="83.0" style="-fx-background-color: #e3242b;" text="Clear" textFill="WHITE">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Button>
-      <Button fx:id="editMovieBtn" layoutX="544.0" layoutY="536.0" mnemonicParsing="false" onAction="#editMovieActionBtn" prefHeight="46.0" prefWidth="131.0" style="-fx-background-color: #e3242b;" text="Edit Movie" textFill="WHITE">
          <font>
             <Font size="21.0" />
          </font>
