@@ -4,9 +4,31 @@ import easv.college.examassignment.be.Movie;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MovieDAO {
     ConnectionManager conMan = new ConnectionManager();
+
+    public List<Movie> getMovies() throws SQLException {
+        List<Movie> movies = new ArrayList<>();
+        try (Connection con = conMan.getConnection()) {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM dbo.Movie");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                Float rating = rs.getFloat("rating");
+                String filelink = rs.getString("filelink");
+                Date lastview = rs.getDate("lastview");
+                Float userrating = rs.getFloat("userrating");
+                movies.add(new Movie (id, name, rating, userrating, lastview, filelink));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error retrieving movies: " + e.getMessage());
+        }
+        return movies;
+    }
 
     /**
      * Used to create a new movie in the database
@@ -41,7 +63,7 @@ public class MovieDAO {
         Float userRating = rs.getFloat("userRating");
         Float imdbRating = rs.getFloat("imdbRating");
         String fileLink = rs.getString("fileLink");
-        LocalDate lastView = rs.getDate("lastView").toLocalDate();
+        Date lastView = rs.getDate("lastView");
 
         return new Movie(id, name, userRating, imdbRating, lastView, fileLink);
     }

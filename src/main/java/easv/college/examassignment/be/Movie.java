@@ -1,16 +1,16 @@
 package easv.college.examassignment.be;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Movie {
     private Integer id;
     private String name;
     private Float imdbRating;
     private Float userRating;
-    private LocalDate lastView;
+    private Date lastView;
     private String fileLink;
 
-    public Movie(Integer id, String name, Float imdbRating, Float userRating, LocalDate lastView, String fileLink) {
+    public Movie(Integer id, String name, Float imdbRating, Float userRating, Date lastView, String fileLink) {
         this.id = id;
         this.name = name;
         this.imdbRating = imdbRating;
@@ -44,10 +44,10 @@ public class Movie {
     }
     public Float getUserRating() {return userRating;}
     public void setUserRating(Float userRating) {this.userRating = userRating;}
-    public LocalDate getLastView() {
+    public String getLastView() {
         return lastView;
     }
-    public void setLastView(LocalDate lastView) {this.lastView = lastView;}
+    public void setLastView(Date lastView) {this.lastView = lastView;}
     public String getFileLink() {return fileLink;}
     public void setFileLink(String fileLink) {this.fileLink = fileLink;}
 
