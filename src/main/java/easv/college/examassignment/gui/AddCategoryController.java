@@ -41,10 +41,5 @@ public class AddCategoryController {
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
 
-
-
-
-
     }
-
 }
