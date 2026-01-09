@@ -108,6 +108,7 @@ public class MainStageController implements Initializable {
 
         movieTitleColoumn.setItems(movieLibrary);
         categoryList.setItems(categoryLibrary);
+        catMovieColoumn.setText(catMovieList.toString());
       /*  try {
             categoryLibrary.addAll(logic.getAllCategories()); // load from db
         } catch (Exception e) {
@@ -116,6 +117,8 @@ public class MainStageController implements Initializable {
         //catMovieColoumn.setItems(catMovieList);
 
        */
+        // loadCategories();
+        
 
 
 

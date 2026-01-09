@@ -22,14 +22,14 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="searchBox" layoutX="14.0" layoutY="36.0" prefHeight="40.0" prefWidth="172.0" promptText="Search for a movie" style="-fx-background-color: #28231D;" />
-      <ListView fx:id="categoryList" layoutX="14.0" layoutY="129.0" prefHeight="200.0" prefWidth="263.0" style="-fx-background-color: #28231D;" />
+      <TextField fx:id="searchBox" layoutX="14.0" layoutY="36.0" prefHeight="40.0" prefWidth="172.0" promptText="Search for a movie" style="-fx-background-color: #28231D; -fx-text-fill: white;" />
+      <ListView fx:id="categoryList" layoutX="14.0" layoutY="129.0" prefHeight="200.0" prefWidth="263.0" style="-fx-background-color: #28231D; -fx-text-fill: white;" />
       <Text fill="#e3242b" layoutX="18.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category" wrappingWidth="100.80337142944336">
          <font>
             <Font size="22.0" />
          </font>
       </Text>
-      <TableView fx:id="movieTitleColoumn" layoutX="287.0" layoutY="16.0" prefHeight="470.0" prefWidth="965.0" style="-fx-background-color: #28231D;">
+      <TableView fx:id="movieTitleColoumn" layoutX="287.0" layoutY="16.0" prefHeight="470.0" prefWidth="965.0" style="-fx-background-color: #28231D; -fx-text-fill: white;">
         <columns>
           <TableColumn prefWidth="28.0" />
           <TableColumn fx:id="title" prefWidth="278.0" text="Title" />
