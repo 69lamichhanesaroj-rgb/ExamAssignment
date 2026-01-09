@@ -15,52 +15,52 @@ public class Logic
         dao = new DAOManager();
     }
 
-    public List<Movie> getAllMovies() throws Exception
+    public List<Movie> getAllMovies() 
     {
         return dao.getMovieDAO().getMovies();
     }
 
-    public void createMovie(Movie movie) throws Exception
+    public void createMovie(Movie movie)
     {
         dao.getMovieDAO().AddMovie(movie);
     }
 
-    public void updateMovie(Movie movie) throws Exception
+    public void updateMovie(Movie movie)
     {
         dao.getMovieDAO().UpdateMovie(movie);
     }
 
-    public void deleteMovie(Movie movie) throws Exception
+    public void deleteMovie(Movie movie) 
     {
         dao.getMovieDAO().DeleteMovie(movie);
     }
 
-    public List<Category> getAllCategories() throws Exception
+    public List<Category> getAllCategories() 
     {
         return dao.getCategoryDAO().getCategories();
     }
 
-    public void createCategory(Category category) throws Exception
+    public void createCategory(Category category) 
     {
         dao.getCategoryDAO().addCategory(category);
     }
 
-    public void updateCategory(Category category) throws Exception
+    public void updateCategory(Category category) 
     {
         dao.getCategoryDAO().UpdateCategory(category);
     }
 
-    public void deleteCategory(Category category) throws Exception
+    public void deleteCategory(Category category) 
     {
         dao.getCategoryDAO().DeleteCategory(category);
     }
 
-    public List<MovieWithCategories> filterMovies(String query) throws Exception
+    public List<MovieWithCategories> filterMovies(String query) 
     {
         return null;
     }
 
-    public List<Category> filterCategory(Category category) throws Exception
+    public List<Category> filterCategory(Category category) 
     {
         return null;
     }

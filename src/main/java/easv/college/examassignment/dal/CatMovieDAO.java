@@ -10,7 +10,7 @@ import java.util.List;
 public class CatMovieDAO {
     ConnectionManager conMan = new ConnectionManager();
 
-    public List<CatMovie> getCatMovies() throws SQLException {
+    public List<CatMovie> getCatMovies() {
         List<CatMovie> catMovie = new ArrayList<>();
         try (Connection con = conMan.getConnection()) {
             Statement stmt = con.createStatement();
@@ -26,7 +26,7 @@ public class CatMovieDAO {
         return catMovie;
     }
 
-    public void addCatMovie(CatMovie catMovie) throws SQLException {
+    public void addCatMovie(CatMovie catMovie) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("INSERT INTO CatMovie (categoryId, movieId) VALUES (?, ?)");
             stmt.setInt(1, catMovie.getCategoryId());

@@ -10,7 +10,7 @@ import java.util.List;
 public class MovieDAO {
     ConnectionManager conMan = new ConnectionManager();
 
-    public List<Movie> getMovies() throws SQLException {
+    public List<Movie> getMovies() {
         List<Movie> movies = new ArrayList<>();
         try (Connection con = conMan.getConnection()) {
             Statement stmt = con.createStatement();
@@ -30,7 +30,7 @@ public class MovieDAO {
         return movies;
     }
 
-    public void AddMovie(Movie movie) throws SQLException {
+    public void AddMovie(Movie movie) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("INSERT INTO Movie (name, rating, fileLink, lastView, userrating) VALUES (?, ?, ?, ?, ?)");
             stmt.setString(1, movie.getName());
@@ -45,7 +45,7 @@ public class MovieDAO {
         }
     }
 
-    public void DeleteMovie(Movie movie) throws SQLException {
+    public void DeleteMovie(Movie movie) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("DELETE Movie WHERE id = ?");
             stmt.setInt(1, movie.getId());
