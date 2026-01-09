@@ -1,6 +1,7 @@
 package easv.college.examassignment.gui;
 
 import easv.college.examassignment.be.Category;
+import easv.college.examassignment.bll.Logic;
 import easv.college.examassignment.dal.CategoryDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 
 public class AddCategoryController {
+    Logic logic = new Logic();
+
 
     @FXML
     private Button cancelBtn;
@@ -34,8 +37,7 @@ public class AddCategoryController {
         Category categoryNew = new Category(null, categoryName.getText());
         categoryNew.setName(categoryName.getText());
 
-        CategoryDAO dao = new CategoryDAO();
-        dao.addCategory(categoryNew);
+        logic.createCategory(categoryNew);
 
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();

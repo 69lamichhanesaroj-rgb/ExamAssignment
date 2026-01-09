@@ -53,7 +53,7 @@ public class MainStageController implements Initializable {
     private TableColumn<?, ?> lastviewColoumn;
 
     @FXML
-    private TableView<Movie> movieTitleColoumn;
+    private TableView<Movie> title;
 
     @FXML
     private RadioButton rating2;
@@ -89,7 +89,7 @@ public class MainStageController implements Initializable {
     private Button searchMovie;
 
     @FXML
-    private TableColumn<Movie, String> title;
+    private TableColumn<Movie, String> movieTitleColoumn;
 
     @FXML
     private TableColumn<?, ?> userRatingColoumn;
@@ -119,7 +119,7 @@ public class MainStageController implements Initializable {
         List<Category> categories = logic.getAllCategories();
         movieLibrary.addAll(movies);
         categoryLibrary.addAll(categories);
-        movieTitleColoumn.setItems(movieLibrary);
+        title.setItems(movieLibrary);
         categoryList.setItems(categoryLibrary);
     }
 
@@ -142,7 +142,7 @@ public class MainStageController implements Initializable {
 
     @FXML
     void deleteMovieActionBtn(ActionEvent event) throws IOException {
-        Movie selectedMovie = movieTitleColoumn.getSelectionModel().getSelectedItem();
+        Movie selectedMovie = title.getSelectionModel().getSelectedItem();
         if (selectedMovie == null) {
             showAlert("Please select a movie to delete");
             return;
