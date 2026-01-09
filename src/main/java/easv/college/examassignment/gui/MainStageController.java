@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainStageController implements Initializable {
@@ -93,22 +94,15 @@ public class MainStageController implements Initializable {
     @FXML
     private TableColumn<?, ?> userRatingColoumn;
 
-    private Logic logic;
-    private ObservableList<Movie> movieLibrary;
-    private ObservableList<CatMovie> catMovieList; // selected catedgory to the specific movie
-    private ObservableList<Category> categoryLibrary;
+    private Logic logic = new Logic();
+    private final ObservableList<Movie> movieLibrary = FXCollections.observableArrayList();
+    private final ObservableList<CatMovie> catMovieList = FXCollections.observableArrayList();
+    private final ObservableList<Category> categoryLibrary = FXCollections.observableArrayList();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        logic = new Logic();
-        movieLibrary = FXCollections.observableArrayList();
-        catMovieList = FXCollections.observableArrayList();
-        categoryLibrary = FXCollections.observableArrayList();
-
-        movieTitleColoumn.setItems(movieLibrary);
-        categoryList.setItems(categoryLibrary);
-        catMovieColoumn.setText(catMovieList.toString());
+        LoadData();
       /*  try {
             categoryLibrary.addAll(logic.getAllCategories()); // load from db
         } catch (Exception e) {
@@ -118,11 +112,15 @@ public class MainStageController implements Initializable {
 
        */
         // loadCategories();
-        
+    }
 
-
-
-
+    private void LoadData() {
+        List<Movie> movies = logic.getAllMovies();
+        List<Category> categories = logic.getAllCategories();
+        movieLibrary.addAll(movies);
+        categoryLibrary.addAll(categories);
+        movieTitleColoumn.setItems(movieLibrary);
+        categoryList.setItems(categoryLibrary);
     }
 
     @FXML
@@ -231,11 +229,6 @@ public class MainStageController implements Initializable {
         stage.show();
     }
 
-    public void loadCategories() throws IOException {
-        ObservableList<Category> categories = FXCollections.observableArrayList();
-        categoryLibrary = FXCollections.observableArrayList();
-        categoryList.setItems(categoryLibrary);
-    }
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -243,7 +236,4 @@ public class MainStageController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
-
 }

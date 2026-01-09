@@ -29,11 +29,7 @@ public class DeleteCategoryController {
     void deleteBtnAction(ActionEvent event) {
 
         CategoryDAO dao = new CategoryDAO();
-        try {
-            dao.DeleteCategory(categoryToBeDeleted);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        dao.DeleteCategory(categoryToBeDeleted);
 
         Stage stage = (Stage) deleteBtn.getScene().getWindow();
         stage.close();
