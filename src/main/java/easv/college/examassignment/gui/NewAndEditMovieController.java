@@ -1,6 +1,5 @@
 package easv.college.examassignment.gui;
 
-import easv.college.examassignment.MovieApplication;
 import easv.college.examassignment.be.Category;
 import easv.college.examassignment.bll.Logic;
 import javafx.collections.FXCollections;
@@ -19,9 +18,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.SQLException;
+import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -68,12 +66,11 @@ public class NewAndEditMovieController implements Initializable {
 
     @FXML
     void saveMovieActionBtn(ActionEvent event) {
-        String title = movieTitle.getText().trim();
-        Float ratingIMBD = Float.parseFloat(IMBDRating.getText());
-        Float ratingUser = Float.parseFloat(userRating.getText());
-        String catMovie = comboboxCategory.getSelectionModel().getSelectedItem().toString();
-
-
+//        String title = movieTitle.getText().trim();
+//        Float ratingIMBD = Float.parseFloat(IMBDRating.getText());
+//        Float ratingUser = Float.parseFloat(userRating.getText());
+//        String catMovie = comboboxCategory.getSelectionModel().getSelectedItem().toString();
+        logic.createMovie(movieTitle.getText(), Float.parseFloat(IMBDRating.getText()), filePath.getText(), new Date(2024-1-1), Float.parseFloat(userRating.getText()));
 
         // close window
         Node source = (Node) event.getSource();

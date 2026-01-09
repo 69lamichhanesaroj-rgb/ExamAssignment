@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -42,12 +43,11 @@ public class MainStageController implements Initializable {
     @FXML
     private Button deleteMovieBtn;
 
-
     @FXML
     private Button deleteCategoryBtn;
+
     @FXML
     private Button closeMainStage;
-
 
     @FXML
     private TableColumn<?, ?> lastviewColoumn;
@@ -115,6 +115,11 @@ public class MainStageController implements Initializable {
     }
 
     private void LoadData() {
+        lastviewColoumn.setCellValueFactory(new PropertyValueFactory<>("lastView"));
+        movieTitleColoumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        userRatingColoumn.setCellValueFactory(new PropertyValueFactory<>("userRating"));
+        IMDBRatingColoumn.setCellValueFactory(new PropertyValueFactory<>("imdbRating"));
+
         List<Movie> movies = logic.getAllMovies();
         List<Category> categories = logic.getAllCategories();
         movieLibrary.addAll(movies);

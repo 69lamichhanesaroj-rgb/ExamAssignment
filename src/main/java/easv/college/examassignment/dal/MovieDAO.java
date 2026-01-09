@@ -1,6 +1,5 @@
 package easv.college.examassignment.dal;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import easv.college.examassignment.be.Movie;
 
 import java.sql.*;
@@ -30,14 +29,14 @@ public class MovieDAO {
         return movies;
     }
 
-    public void AddMovie(Movie movie) {
+    public void AddMovie(String name, Float rating, String fileLink, Date lastView, Float userRating) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("INSERT INTO Movie (name, rating, fileLink, lastView, userrating) VALUES (?, ?, ?, ?, ?)");
-            stmt.setString(1, movie.getName());
-            stmt.setFloat(2, movie.getImdbRating());
-            stmt.setString(3, movie.getFileLink());
-            stmt.setDate(4, movie.getLastView());
-            stmt.setFloat(5, movie.getUserRating());
+            stmt.setString(1, name);
+            stmt.setFloat(2, rating);
+            stmt.setString(3, fileLink);
+            stmt.setDate(4, lastView);
+            stmt.setFloat(5, userRating);
             stmt.executeUpdate();
         }
         catch (SQLException e) {
