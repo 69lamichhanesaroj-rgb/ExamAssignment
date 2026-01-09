@@ -3,7 +3,7 @@ package easv.college.examassignment.bll;
 import easv.college.examassignment.be.*;
 import easv.college.examassignment.dal.DAOManager;
 
-import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 public class Logic
@@ -20,9 +20,9 @@ public class Logic
         return dao.getMovieDAO().getMovies();
     }
 
-    public void createMovie(Movie movie)
+    public void createMovie(String name, Float imdbRating, String fileLink, Date lastView, Float userRating)
     {
-        dao.getMovieDAO().AddMovie(movie);
+        dao.getMovieDAO().AddMovie(name, imdbRating, fileLink, lastView, userRating);
     }
 
     public void updateMovie(Movie movie)
