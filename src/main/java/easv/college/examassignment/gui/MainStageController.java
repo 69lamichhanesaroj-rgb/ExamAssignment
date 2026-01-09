@@ -1,6 +1,6 @@
 package easv.college.examassignment.gui;
 
-import easv.college.examassignment.HelloApplication;
+import easv.college.examassignment.MovieApplication;
 import easv.college.examassignment.be.CatMovie;
 import easv.college.examassignment.be.Category;
 import easv.college.examassignment.be.Movie;
@@ -222,7 +222,7 @@ public class MainStageController implements Initializable {
     }
 
     private void openWindow(String fxmlFileName, String windowTitle) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/easv/college/examassignment/%s".formatted(fxmlFileName)));
+        FXMLLoader fxmlLoader = new FXMLLoader(MovieApplication.class.getResource("/easv/college/examassignment/%s".formatted(fxmlFileName)));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         Scene scene = new Scene(root);
