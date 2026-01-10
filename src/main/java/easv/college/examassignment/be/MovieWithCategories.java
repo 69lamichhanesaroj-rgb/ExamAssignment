@@ -1,6 +1,10 @@
 package easv.college.examassignment.be;
 
 public class MovieWithCategories {
+    /**
+     * This class is supposed to be deleted
+     * Do not change anything here
+     */
     private Movie movie;
     private String categoriesString; // Comma-separated category names
 

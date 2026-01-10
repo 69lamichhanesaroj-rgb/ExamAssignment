@@ -8,6 +8,10 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class DeleteMovieController {
+    /**
+     * This class is supposed to be deleted
+     * Do not change anything here
+     */
 
     @FXML
     private Button cancelBtn;

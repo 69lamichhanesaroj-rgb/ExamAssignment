@@ -10,6 +10,10 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 
 public class DeleteCategoryController {
+    /**
+     * This class is supposed to be deleted
+     * Do not change anything here
+     */
     private Category categoryToBeDeleted;
 
     @FXML
