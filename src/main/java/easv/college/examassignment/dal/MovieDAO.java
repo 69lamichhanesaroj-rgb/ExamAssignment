@@ -57,7 +57,14 @@ public class MovieDAO {
 
     public void UpdateMovie(Movie movie) {
         try (Connection con = conMan.getConnection()) {
-            //ToDo : Implement update movie
+            PreparedStatement stmt = con.prepareStatement("UPDATE Movie SET name = ?, rating = ?, userRating = ?, lastView = ?, fileLink = ? WHERE id = ?");
+
+            stmt.setString(1, movie.getName());
+            stmt.setFloat(2, movie.getImdbRating());
+            stmt.setString(3, movie.getFileLink());
+            stmt.setDate(4, movie.getLastView());
+            stmt.setFloat(5, movie.getUserRating());
+            stmt.executeUpdate();
         }
         catch (SQLException e) {
             System.err.println("Error updating movie: " + e.getMessage());

@@ -44,9 +44,7 @@ public class Movie {
     }
     public Float getUserRating() {return userRating;}
     public void setUserRating(Float userRating) {this.userRating = userRating;}
-    public Date getLastView() {
-        return lastView;
-    }
+    public Date getLastView() {return lastView;}
     public void setLastView(Date lastView) {this.lastView = lastView;}
     public String getFileLink() {return fileLink;}
     public void setFileLink(String fileLink) {this.fileLink = fileLink;}
