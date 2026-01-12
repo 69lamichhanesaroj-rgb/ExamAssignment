@@ -6,11 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -45,15 +42,15 @@ public class NewAndEditMovieController implements Initializable {
     @FXML
     private TextField userRating;
 
-    @FXML
-    void cancelAddEditMovieAction(ActionEvent event) {
+
+    public void cancelAddEditMovieAction(ActionEvent event) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
 
     }
 
-    @FXML
-    void chooseFilePathActionBtn(ActionEvent event) {
+
+    public void chooseFilePathActionBtn(ActionEvent event) {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
@@ -64,8 +61,8 @@ public class NewAndEditMovieController implements Initializable {
 
     }
 
-    @FXML
-    void saveMovieActionBtn(ActionEvent event) {
+
+    public void saveMovieActionBtn(ActionEvent event) {
 //        String title = movieTitle.getText().trim();
 //        Float ratingIMBD = Float.parseFloat(IMBDRating.getText());
 //        Float ratingUser = Float.parseFloat(userRating.getText());

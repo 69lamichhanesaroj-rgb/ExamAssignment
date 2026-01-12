@@ -128,25 +128,21 @@ public class MainStageController implements Initializable {
         categoryList.setItems(categoryLibrary);
     }
 
-    @FXML
-    void addCategoryActionBtn(ActionEvent event) throws IOException {
+    public void addCategoryActionBtn(ActionEvent event) throws IOException {
 
         openWindow("addCategory-view.fxml", "Add Category");
 
 
     }
 
-
-    @FXML
-    void addEditMovieActionBtn(ActionEvent event) throws IOException {
+    public void addEditMovieActionBtn(ActionEvent event) throws IOException {
 
         openWindow("newAndEditMovie-view.fxml", "Add Movie");
 
 
     }
 
-    @FXML
-    void deleteMovieActionBtn(ActionEvent event) throws IOException {
+    public void deleteMovieActionBtn(ActionEvent event) throws IOException {
         Movie selectedMovie = title.getSelectionModel().getSelectedItem();
         if (selectedMovie == null) {
             showAlert("Please select a movie to delete");
@@ -160,67 +156,52 @@ public class MainStageController implements Initializable {
 
     }
 
-
-    @FXML
-    void clearActionBtn(ActionEvent event) {
+    public void clearActionBtn(ActionEvent event) {
 
     }
 
-    @FXML
-    void closeMainStageAction(ActionEvent event) {
+    public void closeMainStageAction(ActionEvent event) {
         Stage stage = (Stage) closeMainStage.getScene().getWindow();
         stage.close();
-
     }
 
-    @FXML
-    void deleteCategoryActionBtn(ActionEvent event) throws IOException {
+    public void deleteCategoryActionBtn(ActionEvent event) throws IOException {
         openWindow("deleteCategory-view.fxml", "Delete Category");
     }
 
-
-    @FXML
-    void radioBtn2Action(MouseEvent event) {
+    public void radioBtn2Action(MouseEvent event) {
 
     }
 
-    @FXML
-    void radioBtn3Action(MouseEvent event) {
+    public void radioBtn3Action(MouseEvent event) {
 
     }
 
-    @FXML
-    void radioBtn4Action(MouseEvent event) {
+    public void radioBtn4Action(MouseEvent event) {
 
     }
 
-    @FXML
-    void radioBtn5Action(MouseEvent event) {
+    public void radioBtn5Action(MouseEvent event) {
 
     }
 
-    @FXML
-    void radioBtn6Action(MouseEvent event) {
+    public void radioBtn6Action(MouseEvent event) {
 
     }
 
-    @FXML
-    void radioBtn7Action(MouseEvent event) {
+    public void radioBtn7Action(MouseEvent event) {
 
     }
 
-    @FXML
-    void radioBtn8Action(MouseEvent event) {
+    public void radioBtn8Action(MouseEvent event) {
 
     }
 
-    @FXML
-    void radioBtn9Action(MouseEvent event) {
+    public void radioBtn9Action(MouseEvent event) {
 
     }
 
-    @FXML
-    void searchActionBtn(MouseEvent event) {
+    public void searchActionBtn(MouseEvent event) {
 
     }
 
