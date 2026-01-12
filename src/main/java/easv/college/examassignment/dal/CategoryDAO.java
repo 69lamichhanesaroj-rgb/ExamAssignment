@@ -47,8 +47,4 @@ public class CategoryDAO {
             System.err.println("Error deleting category: " + e.getMessage());
         }
     }
-
-    public void UpdateCategory(Category category) {
-
-    }
 }

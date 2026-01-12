@@ -35,6 +35,11 @@ public class Logic
         dao.getMovieDAO().DeleteMovie(movie);
     }
 
+    public void editMovie(Movie movie)
+    {
+        dao.getMovieDAO().UpdateMovie(movie);
+    }
+
     public List<Category> getAllCategories() 
     {
         return dao.getCategoryDAO().getCategories();
@@ -43,11 +48,6 @@ public class Logic
     public void createCategory(Category category) 
     {
         dao.getCategoryDAO().addCategory(category);
-    }
-
-    public void updateCategory(Category category) 
-    {
-        dao.getCategoryDAO().UpdateCategory(category);
     }
 
     public void deleteCategory(Category category) 
