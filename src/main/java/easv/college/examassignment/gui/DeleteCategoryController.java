@@ -33,7 +33,7 @@ public class DeleteCategoryController {
     void deleteBtnAction(ActionEvent event) {
 
         CategoryDAO dao = new CategoryDAO();
-        dao.DeleteCategory(categoryToBeDeleted);
+        dao.deleteCategory(categoryToBeDeleted);
 
         Stage stage = (Stage) deleteBtn.getScene().getWindow();
         stage.close();

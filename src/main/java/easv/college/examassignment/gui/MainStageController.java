@@ -102,7 +102,7 @@ public class MainStageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoadData();
+        loadData();
       /*  try {
             categoryLibrary.addAll(logic.getAllCategories()); // load from db
         } catch (Exception e) {
@@ -114,7 +114,7 @@ public class MainStageController implements Initializable {
         // loadCategories();
     }
 
-    private void LoadData() {
+    private void loadData() {
         lastviewColoumn.setCellValueFactory(new PropertyValueFactory<>("lastView"));
         movieTitleColoumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         userRatingColoumn.setCellValueFactory(new PropertyValueFactory<>("userRating"));
