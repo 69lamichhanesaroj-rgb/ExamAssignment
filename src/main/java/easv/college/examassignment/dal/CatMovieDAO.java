@@ -1,6 +1,7 @@
 package easv.college.examassignment.dal;
 
 import easv.college.examassignment.be.CatMovie;
+import easv.college.examassignment.be.MovieWithCategories;
 
 import java.io.IOException;
 import java.sql.*;
@@ -37,4 +38,8 @@ public class CatMovieDAO {
         }
     }
 
+    public List<MovieWithCategories> searchMovies(String query)
+    {
+        return null;
+    }
 }

@@ -222,9 +222,30 @@ public class MainStageController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
+    /**
     public void onSearchBtnPress(ActionEvent actionEvent)
     {
-
+        String query = searchBox.getText().trim();
+        if (query.isEmpty())
+        {
+            LoadData();
+            return;
+        }
+        try
+        {
+            catMovieList.clear();
+            catMovieList.addAll(logic.getAllMovies(query));
+        } catch (Exception e) {
+            showError("Error filtering movies: " + e.getMessage());
+        }
+    }
+     **/
+    public void showError(String message)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
