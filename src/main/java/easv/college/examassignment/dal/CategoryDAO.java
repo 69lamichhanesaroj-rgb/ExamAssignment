@@ -38,7 +38,7 @@ public class CategoryDAO {
         }
     }
 
-    public void DeleteCategory(Category category) {
+    public void deleteCategory(Category category) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("DELETE Category WHERE id = ?");
             stmt.setInt(1, category.getId());
