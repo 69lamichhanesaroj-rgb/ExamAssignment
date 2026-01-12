@@ -22,22 +22,22 @@ public class Logic
 
     public void createMovie(String name, Float imdbRating, String fileLink, Date lastView, Float userRating)
     {
-        dao.getMovieDAO().AddMovie(name, imdbRating, fileLink, lastView, userRating);
+        dao.getMovieDAO().addMovie(name, imdbRating, fileLink, lastView, userRating);
     }
 
     public void updateMovie(Movie movie)
     {
-        dao.getMovieDAO().UpdateMovie(movie);
+        dao.getMovieDAO().updateMovie(movie);
     }
 
     public void deleteMovie(Movie movie) 
     {
-        dao.getMovieDAO().DeleteMovie(movie);
+        dao.getMovieDAO().deleteMovie(movie);
     }
 
     public void editMovie(Movie movie)
     {
-        dao.getMovieDAO().UpdateMovie(movie);
+        dao.getMovieDAO().updateMovie(movie);
     }
 
     public List<Category> getAllCategories() 
@@ -52,7 +52,7 @@ public class Logic
 
     public void deleteCategory(Category category) 
     {
-        dao.getCategoryDAO().DeleteCategory(category);
+        dao.getCategoryDAO().deleteCategory(category);
     }
 
     public List<MovieWithCategories> filterMovies(String query) 

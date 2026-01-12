@@ -29,7 +29,7 @@ public class MovieDAO {
         return movies;
     }
 
-    public void AddMovie(String name, Float rating, String fileLink, Date lastView, Float userRating) {
+    public void addMovie(String name, Float rating, String fileLink, Date lastView, Float userRating) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("INSERT INTO Movie (name, rating, fileLink, lastView, userrating) VALUES (?, ?, ?, ?, ?)");
             stmt.setString(1, name);
@@ -44,7 +44,7 @@ public class MovieDAO {
         }
     }
 
-    public void DeleteMovie(Movie movie) {
+    public void deleteMovie(Movie movie) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("DELETE Movie WHERE id = ?");
             stmt.setInt(1, movie.getId());
@@ -55,7 +55,7 @@ public class MovieDAO {
         }
     }
 
-    public void UpdateMovie(Movie movie) {
+    public void updateMovie(Movie movie) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("UPDATE Movie SET name = ?, rating = ?, userRating = ?, lastView = ?, fileLink = ? WHERE id = ?");
 
