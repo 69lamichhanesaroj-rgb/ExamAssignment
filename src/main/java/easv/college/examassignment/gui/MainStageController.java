@@ -222,4 +222,9 @@ public class MainStageController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public void onSearchBtnPress(ActionEvent actionEvent)
+    {
+
+    }
 }
