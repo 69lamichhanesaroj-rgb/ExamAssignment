@@ -17,7 +17,9 @@ public class CatMovieDAO {
             while (rs.next()) {
                 int categoryId = rs.getInt("categoryId");
                 int movieId = rs.getInt("movieId");
-                catMovie.add(new CatMovie(categoryId, movieId));
+                String categoryName = rs.getString("categoryName");
+                String movieName = rs.getString("movieName");
+                catMovie.add(new CatMovie(categoryId, movieId, categoryName, movieName));
             }
         } catch (SQLException e) {
             System.err.println("Error retrieving CatMovie: " + e.getMessage());

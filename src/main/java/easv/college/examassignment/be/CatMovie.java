@@ -3,10 +3,14 @@ package easv.college.examassignment.be;
 public class CatMovie {
     private Integer categoryId;
     private Integer movieId;
+    private String categoryName;
+    private String movieName;
 
-    public CatMovie(Integer categoryId, Integer movieId) {
+    public CatMovie(Integer categoryId, Integer movieId, String categoryName, String movieName) {
         this.categoryId = categoryId;
         this.movieId = movieId;
+        this.categoryName = categoryName;
+        this.movieName = movieName;
     }
 
     public Integer getCategoryId() {
@@ -20,6 +24,18 @@ public class CatMovie {
     }
     public void setMovieId(Integer movieId) {
         this.movieId = movieId;
+    }
+    public String getCategoryName() {
+        return categoryName;
+    }
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+    public String getMovieName() {
+        return movieName;
+    }
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
     }
 
     /* This part might be usable once we start working on the filter stuff, ofc depending on how we do it
