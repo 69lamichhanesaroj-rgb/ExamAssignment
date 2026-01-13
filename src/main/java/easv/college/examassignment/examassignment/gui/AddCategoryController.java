@@ -1,7 +1,7 @@
-package easv.college.examassignment.gui;
+package easv.college.examassignment.examassignment.gui;
 
-import easv.college.examassignment.be.Category;
-import easv.college.examassignment.bll.Logic;
+import easv.college.examassignment.examassignment.be.Category;
+import easv.college.examassignment.examassignment.bll.Logic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;

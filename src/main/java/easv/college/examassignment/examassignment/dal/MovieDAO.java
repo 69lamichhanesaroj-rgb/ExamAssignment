@@ -1,6 +1,6 @@
-package easv.college.examassignment.dal;
+package easv.college.examassignment.examassignment.dal;
 
-import easv.college.examassignment.be.Movie;
+import easv.college.examassignment.examassignment.be.Movie;
 
 import java.sql.*;
 import java.util.ArrayList;

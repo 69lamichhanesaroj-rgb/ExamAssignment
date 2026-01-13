@@ -1,7 +1,7 @@
-package easv.college.examassignment.bll;
+package easv.college.examassignment.examassignment.bll;
 
-import easv.college.examassignment.be.*;
-import easv.college.examassignment.dal.DAOManager;
+import easv.college.examassignment.examassignment.be.*;
+import easv.college.examassignment.examassignment.dal.DAOManager;
 
 import java.sql.Date;
 import java.util.List;
@@ -62,6 +62,9 @@ public class Logic
 
     public List<Category> filterCategory(Category category) 
     {
+        // this should accept search text and rating
+        // return the movies
+        // public List<MovieWithCategories> filterMovies(String searchText, int rating)
         return null;
     }
 }

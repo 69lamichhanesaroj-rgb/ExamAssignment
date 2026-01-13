@@ -1,8 +1,7 @@
-package easv.college.examassignment.dal;
+package easv.college.examassignment.examassignment.dal;
 
-import easv.college.examassignment.be.CatMovie;
+import easv.college.examassignment.examassignment.be.CatMovie;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

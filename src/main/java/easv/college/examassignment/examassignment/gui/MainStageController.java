@@ -1,10 +1,10 @@
-package easv.college.examassignment.gui;
+package easv.college.examassignment.examassignment.gui;
 
-import easv.college.examassignment.MovieApplication;
-import easv.college.examassignment.be.CatMovie;
-import easv.college.examassignment.be.Category;
-import easv.college.examassignment.be.Movie;
-import easv.college.examassignment.bll.Logic;
+import easv.college.examassignment.examassignment.MovieApplication;
+import easv.college.examassignment.examassignment.be.CatMovie;
+import easv.college.examassignment.examassignment.be.Category;
+import easv.college.examassignment.examassignment.be.Movie;
+import easv.college.examassignment.examassignment.bll.Logic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -89,15 +89,21 @@ public class MainStageController implements Initializable {
     private Button searchMovie;
 
     @FXML
+    private Label warningPopUp;
+
+    @FXML
     private TableColumn<Movie, String> movieTitleColoumn;
 
     @FXML
     private TableColumn<?, ?> userRatingColoumn;
 
+    private boolean areYouSure;
+
     private Logic logic = new Logic();
     private final ObservableList<Movie> movieLibrary = FXCollections.observableArrayList();
     private final ObservableList<CatMovie> catMovieList = FXCollections.observableArrayList();
     private final ObservableList<Category> categoryLibrary = FXCollections.observableArrayList();
+
 
 
     @Override
@@ -145,14 +151,17 @@ public class MainStageController implements Initializable {
     public void deleteMovieActionBtn(ActionEvent event) throws IOException {
         Movie selectedMovie = title.getSelectionModel().getSelectedItem();
         if (selectedMovie == null) {
-            showAlert("Please select a movie to delete");
+            warningPopUp.setText("Please select a movie to delete");
             return;
         }
+        else if(!areYouSure) {warningPopUp.setText("Are you sure you want to delete" + selectedMovie.getName());
+        areYouSure = true;
+        return;}
 
-        openWindow("deleteMovie-view.fxml", "Delete Movie");
-        DeleteMovieController deleteMovieController = new DeleteMovieController();
-        deleteMovieController.setMovieToBeDeleted(selectedMovie);
-        deleteMovieController.setMovieLibrary(movieLibrary);
+        movieLibrary.remove(selectedMovie);
+        System.out.println("Movie deleted");
+        areYouSure = false;
+
 
     }
 
@@ -166,7 +175,19 @@ public class MainStageController implements Initializable {
     }
 
     public void deleteCategoryActionBtn(ActionEvent event) throws IOException {
-        openWindow("deleteCategory-view.fxml", "Delete Category");
+         Category selectedCategory = categoryList.getSelectionModel().getSelectedItem();
+        if (selectedCategory == null) {
+            warningPopUp.setText("Please select a category to delete");
+            return;
+        }
+        else if(!areYouSure) {warningPopUp.setText("Are you sure you want to delete" + selectedCategory.getName());
+        areYouSure = true;
+        return;}
+        logic.deleteCategory(selectedCategory);
+        loadData();
+        areYouSure = false;
+
+
     }
 
     public void radioBtn2Action(MouseEvent event) {
@@ -201,9 +222,6 @@ public class MainStageController implements Initializable {
 
     }
 
-    public void searchActionBtn(MouseEvent event) {
-
-    }
 
     private void openWindow(String fxmlFileName, String windowTitle) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MovieApplication.class.getResource("/easv/college/examassignment/%s".formatted(fxmlFileName)));
@@ -221,6 +239,17 @@ public class MainStageController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void searchActionBtn(MouseEvent event) {
+        String searchText = searchBox.getText();
+        Toggle selectedToggle = ratingIMBD.getSelectedToggle();
+        int selectedRating = 0;
+        if (selectedToggle != null) {
+            RadioButton radioButton = (RadioButton) selectedToggle;
+            selectedRating = Integer.parseInt(radioButton.getText());
+        }
+
     }
 
     public void onSearchBtnPress(ActionEvent actionEvent)

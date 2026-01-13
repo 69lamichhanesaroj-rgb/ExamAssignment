@@ -1,4 +1,4 @@
-package easv.college.examassignment;
+package easv.college.examassignment.examassignment;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

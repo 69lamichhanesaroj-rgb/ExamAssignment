@@ -1,4 +1,4 @@
-package easv.college.examassignment.be;
+package easv.college.examassignment.examassignment.be;
 
 public class CatMovie {
     private Integer categoryId;

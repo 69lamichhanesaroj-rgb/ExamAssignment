@@ -1,6 +1,4 @@
-package easv.college.examassignment.be;
-
-import java.util.Objects;
+package easv.college.examassignment.examassignment.be;
 
 public class Category {
     private Integer id;
@@ -32,6 +30,7 @@ public class Category {
         return Objects.equals(id, category.id);
     }
      */
+
 
     @Override
     public String toString() {
