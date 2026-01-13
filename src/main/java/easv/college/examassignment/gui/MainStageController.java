@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainStageController implements Initializable {
@@ -97,30 +98,44 @@ public class MainStageController implements Initializable {
     @FXML
     private TableColumn<?, ?> userRatingColoumn;
 
-    private boolean areYouSure;
-
     private Logic logic = new Logic();
     private final ObservableList<Movie> movieLibrary = FXCollections.observableArrayList();
     private final ObservableList<CatMovie> catMovieList = FXCollections.observableArrayList();
     private final ObservableList<Category> categoryLibrary = FXCollections.observableArrayList();
 
+    Movie movieToDelete;
+    Category categoryToDelete;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
     }
 
+    /**
+     * Do NOT use this method for refreshing data
+     */
     private void loadData() {
         lastviewColoumn.setCellValueFactory(new PropertyValueFactory<>("lastView"));
         movieTitleColoumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         userRatingColoumn.setCellValueFactory(new PropertyValueFactory<>("userRating"));
         IMDBRatingColoumn.setCellValueFactory(new PropertyValueFactory<>("imdbRating"));
 
-        List<Movie> movies = logic.getAllMovies();
-        List<Category> categories = logic.getAllCategories();
-        movieLibrary.addAll(movies);
-        categoryLibrary.addAll(categories);
+        movieLibrary.addAll(logic.getAllMovies());
+        categoryLibrary.addAll(logic.getAllCategories());
         title.setItems(movieLibrary);
+        categoryList.setItems(categoryLibrary);
+    }
+
+    /**
+     * Use this method for refreshing data 
+     */
+    private void refreshData() {
+        movieLibrary.removeAll();
+        movieLibrary.addAll(logic.getAllMovies());
+        title.setItems(movieLibrary);
+
+        categoryLibrary.removeAll();
+        categoryLibrary.addAll(logic.getAllCategories());
         categoryList.setItems(categoryLibrary);
     }
 
@@ -138,27 +153,30 @@ public class MainStageController implements Initializable {
 
     }
 
-    public void deleteMovieActionBtn(ActionEvent event) throws IOException {
+    public void deleteMovieActionBtn(ActionEvent event) {
         Movie selectedMovie = title.getSelectionModel().getSelectedItem();
         if (selectedMovie == null) {
             warningPopUp.setText("Please select a movie to delete");
             return;
         }
-        else if(!areYouSure) {warningPopUp.setText("Are you sure you want to delete" +" "+ selectedMovie.getName() +" ?");
-        areYouSure = true;
-        return;}
+        
+        if (movieToDelete == null) {
+        warningPopUp.setText("Are you sure you want to delete " + selectedMovie.getName() +" ?");
+        movieToDelete = selectedMovie;
+        }
 
-        movieLibrary.remove(selectedMovie);
-        logic.deleteMovie(selectedMovie);
-        title.getSelectionModel().clearSelection();
+        else if (Objects.equals(movieToDelete, selectedMovie)) {
+            movieLibrary.remove(selectedMovie);
+            logic.deleteMovie(selectedMovie);
+            title.getSelectionModel().clearSelection();
+            warningPopUp.setText(" Movie Deleted! ");
+            movieToDelete = null;
+        }
 
-
-
-        warningPopUp.setText(" Movie Deleted ! ");
-        System.out.println("Movie deleted");
-        areYouSure = false;
-
-
+        else {
+            warningPopUp.setText("Are you sure you want to delete " + selectedMovie.getName() +" ?");
+            movieToDelete = selectedMovie;
+        }
     }
 
     public void clearActionBtn(ActionEvent event) {
@@ -170,22 +188,28 @@ public class MainStageController implements Initializable {
         stage.close();
     }
 
-    public void deleteCategoryActionBtn(ActionEvent event) throws IOException {
-         Category selectedCategory = categoryList.getSelectionModel().getSelectedItem();
+    public void deleteCategoryActionBtn(ActionEvent event) {
+        Category selectedCategory = categoryList.getSelectionModel().getSelectedItem();
         if (selectedCategory == null) {
-            warningPopUp.setText("Please select a category to delete ");
+            warningPopUp.setText("Please select a category to delete");
             return;
         }
-        else if(!areYouSure) {warningPopUp.setText("Are you sure you want to delete "+" " + selectedCategory.getName()+" ?");
-        areYouSure = true;
-        return;}
-        logic.deleteCategory(selectedCategory);
-        categoryLibrary.remove(selectedCategory);
-        warningPopUp.setText("Category Deleted ! ");
-        categoryList.getSelectionModel().clearSelection();
-        areYouSure = false;
 
+        if (categoryToDelete == null){
+            warningPopUp.setText("Are you sure you want to delete " + selectedCategory.getName() + " ?");
+            categoryToDelete = selectedCategory;
+        }
 
+        else if (Objects.equals(categoryToDelete, selectedCategory)) {
+            categoryLibrary.remove(selectedCategory);
+            logic.deleteCategory(selectedCategory);
+            categoryList.getSelectionModel().clearSelection();
+            warningPopUp.setText(" Category Deleted! ");
+            categoryToDelete = null;
+        } else {
+            warningPopUp.setText("Are you sure you want to delete " + selectedCategory.getName() + " ?");
+            categoryToDelete = selectedCategory;
+        }
     }
 
     public void radioBtn2Action(MouseEvent event) {
@@ -247,6 +271,8 @@ public class MainStageController implements Initializable {
             RadioButton radioButton = (RadioButton) selectedToggle;
             selectedRating = Integer.parseInt(radioButton.getText());
         }
+        List<Movie> movies = logic.filterMovies(searchText, selectedRating);
+        title.setItems(FXCollections.observableArrayList(movies));
 
     }
 }
