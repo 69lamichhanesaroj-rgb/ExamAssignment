@@ -247,6 +247,8 @@ public class MainStageController implements Initializable {
             RadioButton radioButton = (RadioButton) selectedToggle;
             selectedRating = Integer.parseInt(radioButton.getText());
         }
+        List<Movie> movies = logic.filterMovies(searchText, selectedRating);
+        title.setItems(FXCollections.observableArrayList(movies));
 
     }
 }

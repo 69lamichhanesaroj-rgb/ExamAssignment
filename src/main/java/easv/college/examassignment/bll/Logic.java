@@ -64,4 +64,20 @@ public class Logic
         // public List<MovieWithCategories> filterMovies(String searchText, int rating)
         return null;
     }
+    public List<Movie>filterMovies(String searchText, Integer minRating)
+    { List<Movie> movies = dao.getMovieDAO().getMovies();
+        return movies.stream().filter(movie -> matchesSearchText(movie,searchText)).filter(movie -> matchesRating(movie,minRating)).toList();
+    }
+    private boolean matchesSearchText (Movie movie, String searchText){
+        if(searchText == null || searchText.isBlank()){
+            return true;
+        }
+        return movie.getName().toLowerCase().contains(searchText.toLowerCase());
+    }
+    private boolean matchesRating (Movie movie, Integer minRating){
+        if (minRating == null){
+            return true;
+        }
+        return movie.getImdbRating() >= minRating;
+    }
 }
