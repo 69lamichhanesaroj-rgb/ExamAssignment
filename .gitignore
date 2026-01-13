@@ -31,5 +31,6 @@ replay_pid*
 .idea/data_source_mappings.xml
 .idea/copilot.data.migration.ask.xml
 .idea/copilot.data.migration.edit.xml
+.idea/sqldialects.xml
 pom.xml
 config/config.settings
