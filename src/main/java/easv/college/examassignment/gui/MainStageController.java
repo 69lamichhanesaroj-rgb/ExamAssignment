@@ -150,6 +150,10 @@ public class MainStageController implements Initializable {
 
         movieLibrary.remove(selectedMovie);
         logic.deleteMovie(selectedMovie);
+        title.getSelectionModel().clearSelection();
+
+
+
         warningPopUp.setText(" Movie Deleted ! ");
         System.out.println("Movie deleted");
         areYouSure = false;
@@ -178,6 +182,7 @@ public class MainStageController implements Initializable {
         logic.deleteCategory(selectedCategory);
         categoryLibrary.remove(selectedCategory);
         warningPopUp.setText("Category Deleted ! ");
+        categoryList.getSelectionModel().clearSelection();
         areYouSure = false;
 
 
