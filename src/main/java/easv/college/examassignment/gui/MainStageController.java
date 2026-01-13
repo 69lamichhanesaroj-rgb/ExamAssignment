@@ -105,19 +105,9 @@ public class MainStageController implements Initializable {
     private final ObservableList<Category> categoryLibrary = FXCollections.observableArrayList();
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
-      /*  try {
-            categoryLibrary.addAll(logic.getAllCategories()); // load from db
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        //catMovieColoumn.setItems(catMovieList);
-
-       */
-        // loadCategories();
     }
 
     private void loadData() {
