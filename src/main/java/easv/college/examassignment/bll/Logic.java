@@ -37,9 +37,9 @@ public class Logic
         dao.getMovieDAO().deleteMovie(movie);
     }
 
-    public void editMovie(Movie movie)
-    {
-        dao.getMovieDAO().updateMovie(movie);
+    public void editMovie(Movie movie) {dao.getMovieDAO().updateMovie(movie);
+    }
+    public void playMovie(Movie movie) {dao.getMovieDAO().playMovie(movie);
     }
 
     public List<Category> getAllCategories()

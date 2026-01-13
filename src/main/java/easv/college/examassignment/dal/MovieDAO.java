@@ -3,6 +3,9 @@ package easv.college.examassignment.dal;
 
 import easv.college.examassignment.be.Movie;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +72,22 @@ public class MovieDAO {
         }
         catch (SQLException e) {
             System.err.println("Error updating movie: " + e.getMessage());
+        }
+    }
+
+    public void playMovie(Movie movie) {
+        try{
+            File file = new File(movie.getFileLink());
+
+            if(!file.exists()){
+                throw new IOException("File not found");
+            }
+
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(file);
+            }
+        } catch (IOException e){
+            System.err.println("Error playing movie: " + e.getMessage());
         }
     }
 }
