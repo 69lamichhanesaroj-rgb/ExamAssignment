@@ -65,7 +65,8 @@ public class Logic
         return null;
     }
     public List<Movie>filterMovies(String searchText, Integer minRating)
-    { List<Movie> movies = dao.getMovieDAO().getMovies();
+    {
+        List<Movie> movies = dao.getMovieDAO().getMovies();
         return movies.stream().filter(movie -> matchesSearchText(movie,searchText)).filter(movie -> matchesRating(movie,minRating)).toList();
     }
     private boolean matchesSearchText (Movie movie, String searchText){
