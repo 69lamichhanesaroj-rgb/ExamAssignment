@@ -251,9 +251,4 @@ public class MainStageController implements Initializable {
         }
 
     }
-
-    public void onSearchBtnPress(ActionEvent actionEvent)
-    {
-
-    }
 }

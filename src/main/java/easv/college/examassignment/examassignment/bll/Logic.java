@@ -55,9 +55,9 @@ public class Logic
         dao.getCategoryDAO().deleteCategory(category);
     }
 
-    public List<MovieWithCategories> filterMovies(String query) 
+    public List<MovieWithCategories> filterMovies(String query)
     {
-        return null;
+        return dao.getCatMovieDAO().searchMovies(query);
     }
 
     public List<Category> filterCategory(Category category) 

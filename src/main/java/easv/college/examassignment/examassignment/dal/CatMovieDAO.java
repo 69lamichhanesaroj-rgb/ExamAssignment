@@ -35,5 +35,4 @@ public class CatMovieDAO {
             System.err.println("Error adding CatMovie: " + e.getMessage());
         }
     }
-
 }
