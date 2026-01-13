@@ -1,10 +1,10 @@
-package easv.college.examassignment.examassignment.gui;
+package easv.college.examassignment.gui;
 
-import easv.college.examassignment.examassignment.MovieApplication;
-import easv.college.examassignment.examassignment.be.CatMovie;
-import easv.college.examassignment.examassignment.be.Category;
-import easv.college.examassignment.examassignment.be.Movie;
-import easv.college.examassignment.examassignment.bll.Logic;
+import easv.college.examassignment.MovieApplication;
+import easv.college.examassignment.be.CatMovie;
+import easv.college.examassignment.be.Category;
+import easv.college.examassignment.be.Movie;
+import easv.college.examassignment.bll.Logic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -159,6 +159,7 @@ public class MainStageController implements Initializable {
         return;}
 
         movieLibrary.remove(selectedMovie);
+        logic.deleteMovie(selectedMovie);
         System.out.println("Movie deleted");
         areYouSure = false;
 
@@ -184,7 +185,7 @@ public class MainStageController implements Initializable {
         areYouSure = true;
         return;}
         logic.deleteCategory(selectedCategory);
-        loadData();
+        categoryLibrary.remove(selectedCategory);
         areYouSure = false;
 
 
@@ -241,7 +242,7 @@ public class MainStageController implements Initializable {
         alert.showAndWait();
     }
 
-    public void searchActionBtn(MouseEvent event) {
+    public void onSearchBtnPress(MouseEvent event) {
         String searchText = searchBox.getText();
         Toggle selectedToggle = ratingIMBD.getSelectedToggle();
         int selectedRating = 0;

@@ -1,4 +1,4 @@
-package easv.college.examassignment.examassignment;
+package easv.college.examassignment;
 
 import javafx.application.Application;
 

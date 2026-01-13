@@ -1,4 +1,4 @@
-package easv.college.examassignment.examassignment.be;
+package easv.college.examassignment.be;
 
 public class Category {
     private Integer id;

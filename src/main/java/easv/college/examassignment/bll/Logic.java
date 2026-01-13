@@ -1,7 +1,9 @@
-package easv.college.examassignment.examassignment.bll;
+package easv.college.examassignment.bll;
 
-import easv.college.examassignment.examassignment.be.*;
-import easv.college.examassignment.examassignment.dal.DAOManager;
+import easv.college.examassignment.be.Category;
+import easv.college.examassignment.be.Movie;
+import easv.college.examassignment.be.*;
+import easv.college.examassignment.dal.DAOManager;
 
 import java.sql.Date;
 import java.util.List;
@@ -15,7 +17,7 @@ public class Logic
         dao = new DAOManager();
     }
 
-    public List<Movie> getAllMovies() 
+    public List<Movie> getAllMovies()
     {
         return dao.getMovieDAO().getMovies();
     }
@@ -40,7 +42,7 @@ public class Logic
         dao.getMovieDAO().updateMovie(movie);
     }
 
-    public List<Category> getAllCategories() 
+    public List<Category> getAllCategories()
     {
         return dao.getCategoryDAO().getCategories();
     }
@@ -53,11 +55,6 @@ public class Logic
     public void deleteCategory(Category category) 
     {
         dao.getCategoryDAO().deleteCategory(category);
-    }
-
-    public List<MovieWithCategories> filterMovies(String query)
-    {
-        return dao.getCatMovieDAO().searchMovies(query);
     }
 
     public List<Category> filterCategory(Category category) 

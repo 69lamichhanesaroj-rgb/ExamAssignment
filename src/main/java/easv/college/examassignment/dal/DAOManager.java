@@ -1,4 +1,4 @@
-package easv.college.examassignment.examassignment.dal;
+package easv.college.examassignment.dal;
 
 public class DAOManager
 {
