@@ -5,6 +5,9 @@ import easv.college.examassignment.be.Movie;
 import easv.college.examassignment.be.*;
 import easv.college.examassignment.dal.DAOManager;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
@@ -39,9 +42,21 @@ public class Logic
 
     public void editMovie(Movie movie) {dao.getMovieDAO().updateMovie(movie);
     }
-    public void playMovie(Movie movie) {dao.getMovieDAO().playMovie(movie);
-    }
+    public void playMovie(Movie movie) {
+        try{
+            File file = new File(movie.getFileLink());
 
+            if(!file.exists()){
+                throw new IOException("File not found");
+            }
+
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(file);
+            }
+        } catch (IOException e){
+            System.err.println("Error playing movie: " + e.getMessage());
+        }
+    }
     public List<Category> getAllCategories()
     {
         return dao.getCategoryDAO().getCategories();

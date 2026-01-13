@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -27,7 +28,7 @@ import java.util.ResourceBundle;
 public class MainStageController implements Initializable {
 
     @FXML
-    private TableColumn<?, ?> IMDBRatingColoumn;
+    private TableColumn<Movie, Float> IMDBRatingColoumn;
 
     @FXML
     private Button addCategoryBtn;
@@ -51,7 +52,7 @@ public class MainStageController implements Initializable {
     private Button closeMainStage;
 
     @FXML
-    private TableColumn<?, ?> lastviewColoumn;
+    private TableColumn<Movie, Date> lastviewColoumn;
 
     @FXML
     private TableView<Movie> title;
@@ -96,7 +97,7 @@ public class MainStageController implements Initializable {
     private TableColumn<Movie, String> movieTitleColoumn;
 
     @FXML
-    private TableColumn<?, ?> userRatingColoumn;
+    private TableColumn<Movie, Float> userRatingColoumn;
 
     private Logic logic = new Logic();
     private final ObservableList<Movie> movieLibrary = FXCollections.observableArrayList();
@@ -180,6 +181,11 @@ public class MainStageController implements Initializable {
     }
 
     public void clearActionBtn(ActionEvent event) {
+        searchBox.clear();
+        ratingIMBD.selectToggle(null);
+        movieLibrary.setAll(logic.getAllMovies());
+        title.setItems(movieLibrary);
+
 
     }
 
@@ -266,7 +272,7 @@ public class MainStageController implements Initializable {
     public void onSearchBtnPress(MouseEvent event) {
         String searchText = searchBox.getText();
         Toggle selectedToggle = ratingIMBD.getSelectedToggle();
-        int selectedRating = 0;
+        Integer selectedRating = null;
         if (selectedToggle != null) {
             RadioButton radioButton = (RadioButton) selectedToggle;
             selectedRating = Integer.parseInt(radioButton.getText());
