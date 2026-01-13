@@ -144,12 +144,13 @@ public class MainStageController implements Initializable {
             warningPopUp.setText("Please select a movie to delete");
             return;
         }
-        else if(!areYouSure) {warningPopUp.setText("Are you sure you want to delete" + selectedMovie.getName());
+        else if(!areYouSure) {warningPopUp.setText("Are you sure you want to delete" +" "+ selectedMovie.getName() +" ?");
         areYouSure = true;
         return;}
 
         movieLibrary.remove(selectedMovie);
         logic.deleteMovie(selectedMovie);
+        warningPopUp.setText(" Movie Deleted ! ");
         System.out.println("Movie deleted");
         areYouSure = false;
 
@@ -168,14 +169,15 @@ public class MainStageController implements Initializable {
     public void deleteCategoryActionBtn(ActionEvent event) throws IOException {
          Category selectedCategory = categoryList.getSelectionModel().getSelectedItem();
         if (selectedCategory == null) {
-            warningPopUp.setText("Please select a category to delete");
+            warningPopUp.setText("Please select a category to delete ");
             return;
         }
-        else if(!areYouSure) {warningPopUp.setText("Are you sure you want to delete" + selectedCategory.getName());
+        else if(!areYouSure) {warningPopUp.setText("Are you sure you want to delete "+" " + selectedCategory.getName()+" ?");
         areYouSure = true;
         return;}
         logic.deleteCategory(selectedCategory);
         categoryLibrary.remove(selectedCategory);
+        warningPopUp.setText("Category Deleted ! ");
         areYouSure = false;
 
 
