@@ -112,11 +112,7 @@ public class MainStageController implements Initializable {
         loadData();
         doubleClickToPlay();
         unwantedMovies();
-        try {
-            unwatchedMovies();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        unwatchedMovies();
     }
 
     /**
@@ -265,27 +261,28 @@ public class MainStageController implements Initializable {
         });
     }
 
-    private void unwantedMovies() {
-        for (Movie movie : movieLibrary) {
-            if (movie.getUserRating() <= 6) {
+    private void unwantedMovies()
+    {
+        for (Movie movie : movieLibrary)
+        {
+            if (movie.getUserRating() <= 6)
+            {
                 showAlert("You have movies with a score of 6 or lower");
             }
         }
     }
 
-    private void unwatchedMovies() throws IOException {
+    private void unwatchedMovies()
+    {
         for (Movie movie : movieLibrary)
         {
-            Path path = Path.of(movie.getFileLink());
-            BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
-            FileTime time = attrs.lastAccessTime();
-            Date accessDate = new Date(time.toMillis());
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(new Date());
-            cal.add(Calendar.YEAR, -2);
-            Date twoYearsAgo = cal.getTime();
+            Date now = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(now);
+            calendar.add(Calendar.YEAR, -2);
+            Date twoYearsAgo = calendar.getTime();
 
-            if (accessDate.before(twoYearsAgo))
+            if (movie.getUserRating() >= twoYearsAgo.getTime())
             {
                 showAlert("You have movies you haven't watched for two years");
             }
