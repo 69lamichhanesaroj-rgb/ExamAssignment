@@ -109,8 +109,10 @@ public class MainStageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadData();
-    }
+
+            loadData();
+        }
+
 
     /**
      * Do NOT use this method for refreshing data
@@ -218,38 +220,6 @@ public class MainStageController implements Initializable {
         }
     }
 
-    public void radioBtn2Action(MouseEvent event) {
-
-    }
-
-    public void radioBtn3Action(MouseEvent event) {
-
-    }
-
-    public void radioBtn4Action(MouseEvent event) {
-
-    }
-
-    public void radioBtn5Action(MouseEvent event) {
-
-    }
-
-    public void radioBtn6Action(MouseEvent event) {
-
-    }
-
-    public void radioBtn7Action(MouseEvent event) {
-
-    }
-
-    public void radioBtn8Action(MouseEvent event) {
-
-    }
-
-    public void radioBtn9Action(MouseEvent event) {
-
-    }
-
 
     private void openWindow(String fxmlFileName, String windowTitle) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MovieApplication.class.getResource("/easv/college/examassignment/%s".formatted(fxmlFileName)));
@@ -269,13 +239,13 @@ public class MainStageController implements Initializable {
         alert.showAndWait();
     }
 
-    public void onSearchBtnPress(MouseEvent event) {
+    public void onSearchBtnPress(ActionEvent event) {
         String searchText = searchBox.getText();
         Toggle selectedToggle = ratingIMBD.getSelectedToggle();
-        Integer selectedRating = null;
+        Float selectedRating = null;
         if (selectedToggle != null) {
             RadioButton radioButton = (RadioButton) selectedToggle;
-            selectedRating = Integer.parseInt(radioButton.getText());
+            selectedRating = Float.parseFloat(radioButton.getText());
         }
         List<Movie> movies = logic.filterMovies(searchText, selectedRating);
         title.setItems(FXCollections.observableArrayList(movies));

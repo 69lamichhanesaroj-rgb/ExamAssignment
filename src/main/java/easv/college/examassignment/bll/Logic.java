@@ -83,7 +83,7 @@ public class Logic
         // public List<MovieWithCategories> filterMovies(String searchText, int rating)
         return null;
     }
-    public List<Movie>filterMovies(String searchText, Integer minRating)
+    public List<Movie>filterMovies(String searchText, Float minRating)
     {
         List<Movie> movies = dao.getMovieDAO().getMovies();
         return movies.stream().filter(movie -> matchesSearchText(movie,searchText)).filter(movie -> matchesRating(movie,minRating)).toList();
@@ -94,10 +94,10 @@ public class Logic
         }
         return movie.getName().toLowerCase().contains(searchText.toLowerCase());
     }
-    private boolean matchesRating (Movie movie, Integer minRating){
+    private boolean matchesRating (Movie movie, Float minRating){
         if (minRating == null){
             return true;
         }
-        return movie.getImdbRating() >= minRating;
+        return movie.getImdbRating() != null && movie.getImdbRating() >= minRating;
     }
 }

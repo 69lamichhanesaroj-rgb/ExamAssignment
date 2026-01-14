@@ -71,7 +71,7 @@ public class NewMovieController implements Initializable {
 
     public void btnSave(ActionEvent event) {
         logic.createMovie(txtMovieTitle.getText(), Float.parseFloat(txtIMBDRating.getText()), txtFilePath.getText(), new java.sql.Date(System.currentTimeMillis()), Float.parseFloat(txtUserRating.getText()));
-
+        logic.getAllMovies();
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();

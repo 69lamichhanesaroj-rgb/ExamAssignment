@@ -12,116 +12,128 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1258.0" style="-fx-background-color: #080402;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.college.examassignment.gui.MainStageController">
-   <children>
-      <Button fx:id="searchMovie" layoutX="191.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#onSearchBtnPress" prefHeight="28.0" prefWidth="93.0" style="-fx-background-color: #e3242b;" text="Search" textFill="WHITE">
-         <font>
-            <Font size="19.0" />
-         </font></Button>
-      <Text fill="#e3242b" layoutX="16.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filters" wrappingWidth="115.99999237060541">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-      </Text>
-      <TextField fx:id="searchBox" layoutX="14.0" layoutY="36.0" prefHeight="40.0" prefWidth="172.0" promptText="Search for a movie" style="-fx-background-color: #28231D; -fx-text-fill: white;" />
-      <ListView fx:id="categoryList" layoutX="14.0" layoutY="129.0" prefHeight="200.0" prefWidth="263.0" style="-fx-background-color: #28231D; -fx-text-fill: white;" />
-      <Text fill="#e3242b" layoutX="18.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category" wrappingWidth="100.80337142944336">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
-      <TableView fx:id="title" layoutX="287.0" layoutY="16.0" prefHeight="470.0" prefWidth="965.0" style="-fx-background-color: #28231D; -fx-text-fill: black;">
-        <columns>
-          <TableColumn prefWidth="28.0" />
-          <TableColumn fx:id="movieTitleColoumn" prefWidth="278.0" text="Title" />
-            <TableColumn fx:id="IMDBRatingColoumn" prefWidth="170.0" text="IMDB Rating" />
-            <TableColumn fx:id="userRatingColoumn" prefWidth="151.0" text="User Rating" />
-            <TableColumn fx:id="catMovieColoumn" prefWidth="149.0" text="Categories" />
-            <TableColumn fx:id="lastviewColoumn" prefWidth="188.0" text="Last View" />
-        </columns>
-      </TableView>
-      <Button fx:id="addEditMovieBtn" layoutX="393.0" layoutY="537.0" mnemonicParsing="false" onAction="#addEditMovieActionBtn" prefHeight="46.0" prefWidth="189.0" style="-fx-background-color: #e3242b;" text="Add / Edit Movie" textFill="WHITE">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Button>
-      <Button fx:id="addCategoryBtn" layoutX="887.0" layoutY="536.0" mnemonicParsing="false" onAction="#addCategoryActionBtn" prefHeight="46.0" prefWidth="164.0" style="-fx-background-color: #e3242b;" text="Add Category" textFill="WHITE">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Button>
-      <Button fx:id="deleteCategoryBtn" layoutX="1073.0" layoutY="536.0" mnemonicParsing="false" onAction="#deleteCategoryActionBtn" prefHeight="46.0" prefWidth="178.0" style="-fx-background-color: #e3242b;" text="Delete Category" textFill="WHITE">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Button>
-      <Text fill="#e3242b" layoutX="18.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimum IMDB Rating">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
-      <Button fx:id="closeMainStage" layoutX="1149.0" layoutY="603.0" mnemonicParsing="false" onAction="#closeMainStageAction" prefHeight="46.0" prefWidth="101.0" style="-fx-background-color: #e3242b;" text="Close" textFill="WHITE">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Button>
-      <RadioButton fx:id="rating2" layoutX="18.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#radioBtn2Action" text="2" textFill="#e3242b">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-         <toggleGroup>
-            <ToggleGroup fx:id="ratingIMBD" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton fx:id="rating3" layoutX="18.0" layoutY="394.0" mnemonicParsing="false" onMouseClicked="#radioBtn3Action" text="3" textFill="#e3242b" toggleGroup="$ratingIMBD">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="rating4" layoutX="17.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#radioBtn4Action" text="4" textFill="#e3242b" toggleGroup="$ratingIMBD">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="rating5" layoutX="18.0" layoutY="453.0" mnemonicParsing="false" onMouseClicked="#radioBtn5Action" text="5" textFill="#e3242b" toggleGroup="$ratingIMBD">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="rating6" layoutX="18.0" layoutY="482.0" mnemonicParsing="false" onMouseClicked="#radioBtn6Action" text="6" textFill="#e3242b" toggleGroup="$ratingIMBD">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="rating7" layoutX="18.0" layoutY="512.0" mnemonicParsing="false" onMouseClicked="#radioBtn7Action" text="7" textFill="#e3242b" toggleGroup="$ratingIMBD">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="rating8" layoutX="18.0" layoutY="543.0" mnemonicParsing="false" onMouseClicked="#radioBtn8Action" text="8" textFill="#e3242b" toggleGroup="$ratingIMBD">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="rating9" layoutX="18.0" layoutY="574.0" mnemonicParsing="false" onMouseClicked="#radioBtn9Action" text="9" textFill="#e3242b" toggleGroup="$ratingIMBD">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </RadioButton>
-      <Button fx:id="clearActionBtn" layoutX="286.0" layoutY="537.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="83.0" style="-fx-background-color: #e3242b;" text="Clear" textFill="WHITE">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Button>
-      <Button fx:id="deleteMovieBtn" layoutX="702.0" layoutY="537.0" mnemonicParsing="false" onAction="#deleteMovieActionBtn" prefHeight="46.0" prefWidth="164.0" style="-fx-background-color: #e3242b;" text="Delete Movie" textFill="WHITE">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Button>
-      <Label fx:id="warningPopUp" layoutX="289.0" layoutY="503.0" prefHeight="17.0" prefWidth="965.0" style="-fx-text-fill: white;">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1258.0"
+            style="-fx-background-color: #080402;"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="easv.college.examassignment.gui.MainStageController">
+    <children>
+        <Button fx:id="searchMovie" layoutX="191.0" layoutY="35.0" mnemonicParsing="false" onAction="#onSearchBtnPress"
+                prefHeight="28.0" prefWidth="93.0" style="-fx-background-color: #e3242b;" text="Search" textFill="WHITE">
+            <font>
+                <Font size="19.0"/>
+            </font>
+        </Button>
+
+        <Text fill="#e3242b" layoutX="16.0" layoutY="30.0" text="Filters">
+            <font>
+                <Font name="System Bold" size="30.0"/>
+            </font>
+        </Text>
+
+        <TextField fx:id="searchBox" layoutX="14.0" layoutY="36.0" prefHeight="40.0" prefWidth="172.0"
+                   promptText="Search for a movie"
+                   style="-fx-background-color: #28231D; -fx-text-fill: white;"/>
+
+        <ListView fx:id="categoryList" layoutX="14.0" layoutY="129.0" prefHeight="200.0" prefWidth="263.0"
+                  style="-fx-background-color: #28231D; -fx-text-fill: white;"/>
+
+        <Text fill="#e3242b" layoutX="18.0" layoutY="110.0" text="Category">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Text>
+
+        <TableView fx:id="title" layoutX="287.0" layoutY="16.0" prefHeight="470.0" prefWidth="965.0"
+                   style="-fx-background-color: #28231D; -fx-text-fill: black;">
+            <columns>
+                <TableColumn prefWidth="28.0"/>
+                <TableColumn fx:id="movieTitleColoumn" prefWidth="278.0" text="Title"/>
+                <TableColumn fx:id="IMDBRatingColoumn" prefWidth="170.0" text="IMDB Rating"/>
+                <TableColumn fx:id="userRatingColoumn" prefWidth="151.0" text="User Rating"/>
+                <TableColumn fx:id="catMovieColoumn" prefWidth="149.0" text="Categories"/>
+                <TableColumn fx:id="lastviewColoumn" prefWidth="188.0" text="Last View"/>
+            </columns>
+        </TableView>
+
+        <Button fx:id="addEditMovieBtn" layoutX="393.0" layoutY="537.0" mnemonicParsing="false"
+                onAction="#addEditMovieActionBtn" prefHeight="46.0" prefWidth="189.0"
+                style="-fx-background-color: #e3242b;" text="Add / Edit Movie" textFill="WHITE">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Button>
+
+        <Button fx:id="addCategoryBtn" layoutX="887.0" layoutY="536.0" mnemonicParsing="false"
+                onAction="#addCategoryActionBtn" prefHeight="46.0" prefWidth="164.0"
+                style="-fx-background-color: #e3242b;" text="Add Category" textFill="WHITE">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Button>
+
+        <Button fx:id="deleteCategoryBtn" layoutX="1073.0" layoutY="536.0" mnemonicParsing="false"
+                onAction="#deleteCategoryActionBtn" prefHeight="46.0" prefWidth="178.0"
+                style="-fx-background-color: #e3242b;" text="Delete Category" textFill="WHITE">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Button>
+
+        <Text fill="#e3242b" layoutX="18.0" layoutY="359.0" text="Minimum IMDB Rating">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Text>
+
+        <Button fx:id="closeMainStage" layoutX="1149.0" layoutY="603.0" mnemonicParsing="false"
+                onAction="#closeMainStageAction" prefHeight="46.0" prefWidth="101.0"
+                style="-fx-background-color: #e3242b;" text="Close" textFill="WHITE">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Button>
+
+        <!-- IMDB Rating RadioButtons -->
+        <RadioButton fx:id="rating2" layoutX="18.0" layoutY="365.0" text="2" textFill="#e3242b" toggleGroup="$ratingIMBD">
+            <font><Font name="System Bold" size="19.0"/></font>
+        </RadioButton>
+        <RadioButton fx:id="rating3" layoutX="18.0" layoutY="394.0" text="3" textFill="#e3242b" toggleGroup="$ratingIMBD">
+            <font><Font name="System Bold" size="19.0"/></font>
+        </RadioButton>
+        <RadioButton fx:id="rating4" layoutX="17.0" layoutY="424.0" text="4" textFill="#e3242b" toggleGroup="$ratingIMBD">
+            <font><Font name="System Bold" size="19.0"/></font>
+        </RadioButton>
+        <RadioButton fx:id="rating5" layoutX="18.0" layoutY="453.0" text="5" textFill="#e3242b" toggleGroup="$ratingIMBD">
+            <font><Font name="System Bold" size="19.0"/></font>
+        </RadioButton>
+        <RadioButton fx:id="rating6" layoutX="18.0" layoutY="482.0" text="6" textFill="#e3242b" toggleGroup="$ratingIMBD">
+            <font><Font name="System Bold" size="19.0"/></font>
+        </RadioButton>
+        <RadioButton fx:id="rating7" layoutX="18.0" layoutY="512.0" text="7" textFill="#e3242b" toggleGroup="$ratingIMBD">
+            <font><Font name="System Bold" size="19.0"/></font>
+        </RadioButton>
+        <RadioButton fx:id="rating8" layoutX="18.0" layoutY="543.0" text="8" textFill="#e3242b" toggleGroup="$ratingIMBD">
+            <font><Font name="System Bold" size="19.0"/></font>
+        </RadioButton>
+        <RadioButton fx:id="rating9" layoutX="18.0" layoutY="574.0" text="9" textFill="#e3242b" toggleGroup="$ratingIMBD">
+            <font><Font name="System Bold" size="19.0"/></font>
+        </RadioButton>
+
+        <Button fx:id="clearActionBtn" layoutX="286.0" layoutY="537.0" mnemonicParsing="false" prefHeight="45.0"
+                prefWidth="83.0" style="-fx-background-color: #e3242b;" text="Clear" textFill="WHITE">
+            <font><Font size="21.0"/></font>
+        </Button>
+
+        <Button fx:id="deleteMovieBtn" layoutX="702.0" layoutY="537.0" mnemonicParsing="false"
+                onAction="#deleteMovieActionBtn" prefHeight="46.0" prefWidth="164.0"
+                style="-fx-background-color: #e3242b;" text="Delete Movie" textFill="WHITE">
+            <font><Font size="21.0"/></font>
+        </Button>
+
+        <Label fx:id="warningPopUp" layoutX="289.0" layoutY="503.0" prefHeight="17.0" prefWidth="965.0"
+               style="-fx-text-fill: white;">
+            <font><Font size="20.0"/></font>
+        </Label>
+    </children>
 </AnchorPane>
