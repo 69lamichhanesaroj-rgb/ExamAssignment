@@ -281,8 +281,8 @@ public class MainStageController implements Initializable {
             FileTime time = attrs.lastAccessTime();
             Date accessDate = new Date(time.toMillis());
             Calendar cal = Calendar.getInstance();
-            cal.setTime(new Date()); // Current date
-            cal.add(Calendar.YEAR, -2); // Subtract two years
+            cal.setTime(new Date());
+            cal.add(Calendar.YEAR, -2);
             Date twoYearsAgo = cal.getTime();
 
             if (accessDate.before(twoYearsAgo))
