@@ -20,10 +20,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
+import java.util.*;
 
 public class MainStageController implements Initializable {
 
@@ -109,10 +109,15 @@ public class MainStageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-            loadData();
+        loadData();
+        doubleClickToPlay();
+        unwantedMovies();
+        try {
+            unwatchedMovies();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
+    }
 
     /**
      * Do NOT use this method for refreshing data
@@ -130,14 +135,14 @@ public class MainStageController implements Initializable {
     }
 
     /**
-     * Use this method for refreshing data 
+     * Use this method for refreshing data
      */
     private void refreshData() {
-        movieLibrary.removeAll();
+        movieLibrary.clear();
         movieLibrary.addAll(logic.getAllMovies());
         title.setItems(movieLibrary);
 
-        categoryLibrary.removeAll();
+        categoryLibrary.clear();
         categoryLibrary.addAll(logic.getAllCategories());
         categoryList.setItems(categoryLibrary);
     }
@@ -162,22 +167,18 @@ public class MainStageController implements Initializable {
             warningPopUp.setText("Please select a movie to delete");
             return;
         }
-        
-        if (movieToDelete == null) {
-        warningPopUp.setText("Are you sure you want to delete " + selectedMovie.getName() +" ?");
-        movieToDelete = selectedMovie;
-        }
 
-        else if (Objects.equals(movieToDelete, selectedMovie)) {
+        if (movieToDelete == null) {
+            warningPopUp.setText("Are you sure you want to delete " + selectedMovie.getName() + " ?");
+            movieToDelete = selectedMovie;
+        } else if (Objects.equals(movieToDelete, selectedMovie)) {
             movieLibrary.remove(selectedMovie);
             logic.deleteMovie(selectedMovie);
             title.getSelectionModel().clearSelection();
             warningPopUp.setText(" Movie Deleted! ");
             movieToDelete = null;
-        }
-
-        else {
-            warningPopUp.setText("Are you sure you want to delete " + selectedMovie.getName() +" ?");
+        } else {
+            warningPopUp.setText("Are you sure you want to delete " + selectedMovie.getName() + " ?");
             movieToDelete = selectedMovie;
         }
     }
@@ -187,8 +188,6 @@ public class MainStageController implements Initializable {
         ratingIMBD.selectToggle(null);
         movieLibrary.setAll(logic.getAllMovies());
         title.setItems(movieLibrary);
-
-
     }
 
     public void closeMainStageAction(ActionEvent event) {
@@ -203,12 +202,10 @@ public class MainStageController implements Initializable {
             return;
         }
 
-        if (categoryToDelete == null){
+        if (categoryToDelete == null) {
             warningPopUp.setText("Are you sure you want to delete " + selectedCategory.getName() + " ?");
             categoryToDelete = selectedCategory;
-        }
-
-        else if (Objects.equals(categoryToDelete, selectedCategory)) {
+        } else if (Objects.equals(categoryToDelete, selectedCategory)) {
             categoryLibrary.remove(selectedCategory);
             logic.deleteCategory(selectedCategory);
             categoryList.getSelectionModel().clearSelection();
@@ -228,7 +225,9 @@ public class MainStageController implements Initializable {
         Scene scene = new Scene(root);
         stage.setTitle(windowTitle);
         stage.setScene(scene);
-        stage.show();
+        stage.setResizable(false);
+        stage.showAndWait();
+        refreshData();
     }
 
     private void showAlert(String message) {
@@ -249,6 +248,49 @@ public class MainStageController implements Initializable {
         }
         List<Movie> movies = logic.filterMovies(searchText, selectedRating);
         title.setItems(FXCollections.observableArrayList(movies));
+    }
 
+    public void doubleClickToPlay() {
+        title.setRowFactory(tv -> {
+            TableRow<Movie> row = new TableRow<>();
+
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    Movie selectedMovie = row.getItem();
+                    logic.playMovie(selectedMovie);
+                }
+            });
+
+            return row;
+        });
+    }
+
+    private void unwantedMovies() {
+        for (Movie movie : movieLibrary) {
+            if (movie.getUserRating() <= 6) {
+                showAlert("You have movies with a score of 6 or lower");
+            }
+        }
+    }
+
+    private void unwatchedMovies() throws IOException {
+        for (Movie movie : movieLibrary)
+        {
+            Path path = Path.of(movie.getFileLink());
+            BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
+            FileTime time = attrs.lastAccessTime();
+            Date accessDate = new Date(time.toMillis());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date()); // Current date
+            cal.add(Calendar.YEAR, -2); // Subtract two years
+            Date twoYearsAgo = cal.getTime();
+
+            if (accessDate.before(twoYearsAgo))
+            {
+                showAlert("You have movies you haven't watched for two years");
+            }
+        }
     }
 }
+
+
