@@ -20,10 +20,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
+import java.util.*;
 
 public class MainStageController implements Initializable {
 
@@ -276,7 +276,7 @@ public class MainStageController implements Initializable {
         title.setItems(FXCollections.observableArrayList(movies));
     }
 
-    public void doubleClickToPlay(){
+    public void doubleClickToPlay() {
         title.setRowFactory(tv -> {
             TableRow<Movie> row = new TableRow<>();
 
@@ -291,21 +291,32 @@ public class MainStageController implements Initializable {
         });
     }
 
-    private void unwantedMovies()
-    {
-        for (Movie movie : movieLibrary)
-        {
-            if (movie.getUserRating() <= 6)
-            {
+    private void unwantedMovies() {
+        for (Movie movie : movieLibrary) {
+            if (movie.getUserRating() <= 6) {
                 showAlert("You have movies with a score of 6 or lower");
             }
         }
     }
 
-    private void unwatchedMovies()
+    private void unwatchedMovies() throws IOException
     {
         for (Movie movie : movieLibrary)
-        {}
+        {
+            Path path = Path.of(movie.getFileLink());
+            BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
+            FileTime time = attrs.lastAccessTime();
+            Date accessDate = new Date(time.toMillis());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date()); // Current date
+            cal.add(Calendar.YEAR, -2); // Subtract two years
+            Date twoYearsAgo = cal.getTime();
+
+            if (accessDate.before(twoYearsAgo))
+            {
+                showAlert("You have movies you haven't watched for two years");
+            }
+        }
     }
 }
 
