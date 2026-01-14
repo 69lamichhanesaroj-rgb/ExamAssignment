@@ -30,11 +30,6 @@ public class Logic
         dao.getMovieDAO().addMovie(name, imdbRating, fileLink, lastView, userRating);
     }
 
-    public void updateMovie(Movie movie)
-    {
-        dao.getMovieDAO().updateMovie(movie);
-    }
-
     public void deleteMovie(Movie movie) 
     {
         dao.getMovieDAO().deleteMovie(movie);
