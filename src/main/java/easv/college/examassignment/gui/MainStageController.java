@@ -110,7 +110,10 @@ public class MainStageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
+<<<<<<< Updated upstream
         doubleClickToPlay();
+=======
+>>>>>>> Stashed changes
     }
 
     /**
@@ -272,7 +275,13 @@ public class MainStageController implements Initializable {
             RadioButton radioButton = (RadioButton) selectedToggle;
             selectedRating = Integer.parseInt(radioButton.getText());
         }
+<<<<<<< Updated upstream
+=======
+        List<Movie> movies = logic.filterMovies(searchText, selectedRating);
+        title.setItems(FXCollections.observableArrayList(movies));
     }
+
+>>>>>>> Stashed changes
 
     public void doubleClickToPlay(){
         title.setRowFactory(tv -> {
