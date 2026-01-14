@@ -129,7 +129,7 @@ public class MainStageController implements Initializable {
     }
 
     /**
-     * Use this method for refreshing data 
+     * Use this method for refreshing data
      */
     private void refreshData() {
         movieLibrary.removeAll();
@@ -161,22 +161,18 @@ public class MainStageController implements Initializable {
             warningPopUp.setText("Please select a movie to delete");
             return;
         }
-        
-        if (movieToDelete == null) {
-        warningPopUp.setText("Are you sure you want to delete " + selectedMovie.getName() +" ?");
-        movieToDelete = selectedMovie;
-        }
 
-        else if (Objects.equals(movieToDelete, selectedMovie)) {
+        if (movieToDelete == null) {
+            warningPopUp.setText("Are you sure you want to delete " + selectedMovie.getName() + " ?");
+            movieToDelete = selectedMovie;
+        } else if (Objects.equals(movieToDelete, selectedMovie)) {
             movieLibrary.remove(selectedMovie);
             logic.deleteMovie(selectedMovie);
             title.getSelectionModel().clearSelection();
             warningPopUp.setText(" Movie Deleted! ");
             movieToDelete = null;
-        }
-
-        else {
-            warningPopUp.setText("Are you sure you want to delete " + selectedMovie.getName() +" ?");
+        } else {
+            warningPopUp.setText("Are you sure you want to delete " + selectedMovie.getName() + " ?");
             movieToDelete = selectedMovie;
         }
     }
@@ -202,12 +198,10 @@ public class MainStageController implements Initializable {
             return;
         }
 
-        if (categoryToDelete == null){
+        if (categoryToDelete == null) {
             warningPopUp.setText("Are you sure you want to delete " + selectedCategory.getName() + " ?");
             categoryToDelete = selectedCategory;
-        }
-
-        else if (Objects.equals(categoryToDelete, selectedCategory)) {
+        } else if (Objects.equals(categoryToDelete, selectedCategory)) {
             categoryLibrary.remove(selectedCategory);
             logic.deleteCategory(selectedCategory);
             categoryList.getSelectionModel().clearSelection();
@@ -278,9 +272,6 @@ public class MainStageController implements Initializable {
             RadioButton radioButton = (RadioButton) selectedToggle;
             selectedRating = Integer.parseInt(radioButton.getText());
         }
-        List<Movie> movies = logic.filterMovies(searchText, selectedRating);
-        title.setItems(FXCollections.observableArrayList(movies));
-
     }
 
     public void doubleClickToPlay(){
@@ -298,3 +289,5 @@ public class MainStageController implements Initializable {
         });
     }
 }
+
+
