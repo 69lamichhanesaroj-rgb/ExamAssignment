@@ -111,6 +111,12 @@ public class MainStageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
         doubleClickToPlay();
+        unwantedMovies();
+        try {
+            unwatchedMovies();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -299,8 +305,7 @@ public class MainStageController implements Initializable {
         }
     }
 
-    private void unwatchedMovies() throws IOException
-    {
+    private void unwatchedMovies() throws IOException {
         for (Movie movie : movieLibrary)
         {
             Path path = Path.of(movie.getFileLink());
