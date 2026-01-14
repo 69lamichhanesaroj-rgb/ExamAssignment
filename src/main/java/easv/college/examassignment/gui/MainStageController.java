@@ -110,10 +110,7 @@ public class MainStageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
-<<<<<<< Updated upstream
         doubleClickToPlay();
-=======
->>>>>>> Stashed changes
     }
 
     /**
@@ -275,13 +272,9 @@ public class MainStageController implements Initializable {
             RadioButton radioButton = (RadioButton) selectedToggle;
             selectedRating = Integer.parseInt(radioButton.getText());
         }
-<<<<<<< Updated upstream
-=======
         List<Movie> movies = logic.filterMovies(searchText, selectedRating);
         title.setItems(FXCollections.observableArrayList(movies));
     }
-
->>>>>>> Stashed changes
 
     public void doubleClickToPlay(){
         title.setRowFactory(tv -> {
@@ -296,6 +289,23 @@ public class MainStageController implements Initializable {
 
             return row;
         });
+    }
+
+    private void unwantedMovies()
+    {
+        for (Movie movie : movieLibrary)
+        {
+            if (movie.getUserRating() <= 6)
+            {
+                showAlert("You have movies with a score of 6 or lower");
+            }
+        }
+    }
+
+    private void unwatchedMovies()
+    {
+        for (Movie movie : movieLibrary)
+        {}
     }
 }
 
