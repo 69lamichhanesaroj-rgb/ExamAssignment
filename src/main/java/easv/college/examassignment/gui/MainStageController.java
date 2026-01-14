@@ -274,18 +274,26 @@ public class MainStageController implements Initializable {
 
     private void unwatchedMovies()
     {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -2);
+        Date twoYearsAgo = calendar.getTime();
+
+        boolean foundUnwatched = false;
+
         for (Movie movie : movieLibrary)
         {
-            Date now = new Date();
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(now);
-            calendar.add(Calendar.YEAR, -2);
-            Date twoYearsAgo = calendar.getTime();
+            java.sql.Date lastView = movie.getLastView();
 
-            if (movie.getUserRating() >= twoYearsAgo.getTime())
+            if (lastView != null && lastView.before(twoYearsAgo))
             {
-                showAlert("You have movies you haven't watched for two years");
+                foundUnwatched = true;
+                break;
             }
+        }
+
+        if (foundUnwatched)
+        {
+            showAlert("You have movies you haven't watched for two years");
         }
     }
 }
