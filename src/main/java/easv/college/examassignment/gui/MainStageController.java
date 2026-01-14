@@ -132,11 +132,11 @@ public class MainStageController implements Initializable {
      * Use this method for refreshing data
      */
     private void refreshData() {
-        movieLibrary.removeAll();
+        movieLibrary.clear();
         movieLibrary.addAll(logic.getAllMovies());
         title.setItems(movieLibrary);
 
-        categoryLibrary.removeAll();
+        categoryLibrary.clear();
         categoryLibrary.addAll(logic.getAllCategories());
         categoryList.setItems(categoryLibrary);
     }
@@ -182,8 +182,6 @@ public class MainStageController implements Initializable {
         ratingIMBD.selectToggle(null);
         movieLibrary.setAll(logic.getAllMovies());
         title.setItems(movieLibrary);
-
-
     }
 
     public void closeMainStageAction(ActionEvent event) {
@@ -253,7 +251,9 @@ public class MainStageController implements Initializable {
         Scene scene = new Scene(root);
         stage.setTitle(windowTitle);
         stage.setScene(scene);
-        stage.show();
+        stage.setResizable(false);
+        stage.showAndWait();
+        refreshData();
     }
 
     private void showAlert(String message) {
