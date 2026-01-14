@@ -110,6 +110,7 @@ public class MainStageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
+        doubleClickToPlay();
     }
 
     /**
@@ -280,5 +281,20 @@ public class MainStageController implements Initializable {
         List<Movie> movies = logic.filterMovies(searchText, selectedRating);
         title.setItems(FXCollections.observableArrayList(movies));
 
+    }
+
+    public void doubleClickToPlay(){
+        title.setRowFactory(tv -> {
+            TableRow<Movie> row = new TableRow<>();
+
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    Movie selectedMovie = row.getItem();
+                    logic.playMovie(selectedMovie);
+                }
+            });
+
+            return row;
+        });
     }
 }
