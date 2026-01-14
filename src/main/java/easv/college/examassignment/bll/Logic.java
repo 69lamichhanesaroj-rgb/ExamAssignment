@@ -40,10 +40,14 @@ public class Logic
         dao.getMovieDAO().deleteMovie(movie);
     }
 
-    public void editMovie(Movie movie) {dao.getMovieDAO().updateMovie(movie);
+    public void editMovie(Movie movie)
+    {
+        dao.getMovieDAO().updateMovie(movie);
     }
-    public void playMovie(Movie movie) {
-        try{
+    public void playMovie(Movie movie)
+    {
+        try
+        {
             File file = new File(movie.getFileLink());
 
             if(!file.exists()){
