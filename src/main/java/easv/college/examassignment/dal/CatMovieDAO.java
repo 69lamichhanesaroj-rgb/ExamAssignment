@@ -1,5 +1,6 @@
 package easv.college.examassignment.dal;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import easv.college.examassignment.be.CatMovie;
 
 import java.sql.*;
@@ -9,22 +10,39 @@ import java.util.List;
 public class CatMovieDAO {
     ConnectionManager conMan = new ConnectionManager();
 
-    public List<CatMovie> getCatMovies() {
-        List<CatMovie> catMovie = new ArrayList<>();
-        try (Connection con = conMan.getConnection()) {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM dbo.CatMovie");
+    public String getCatMovies(int movieId) throws SQLServerException {
+        try (Connection con = conMan.getConnection())
+        {
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM dbo.CatMovie WHERE MovieId = ?");
+            stmt.setInt(1, movieId);
+            ResultSet rs = stmt.executeQuery();
+            List<Integer> categories = new ArrayList<>();
             while (rs.next()) {
-                int categoryId = rs.getInt("categoryId");
-                int movieId = rs.getInt("movieId");
-                String categoryName = rs.getString("categoryName");
-                String movieName = rs.getString("movieName");
-                catMovie.add(new CatMovie(categoryId, movieId, categoryName, movieName));
+                categories.add(rs.getInt("CategoryId"));
             }
+            String catNames = "";
+            for (int i = 0; i < categories.size(); i++) {
+                String cat = getMoviesByCategory(categories.get(i));
+                if (i == 0)
+                    catNames = cat;
+                else
+                    catNames = catNames + ", " + cat;
+            }
+            return catNames;
         } catch (SQLException e) {
-            System.err.println("Error retrieving CatMovie: " + e.getMessage());
+            throw new RuntimeException(e);
         }
-        return catMovie;
+    }
+
+    public String getMoviesByCategory(int categoryId) throws SQLException {
+        try (Connection con = conMan.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement("SELECT name FROM dbo.Category WHERE id = ?");
+            stmt.setInt(1, categoryId);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return rs.getString("name");
+
+        }
     }
 
     public void addCatMovie(CatMovie catMovie) {

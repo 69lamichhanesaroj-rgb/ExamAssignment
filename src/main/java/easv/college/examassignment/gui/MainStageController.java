@@ -123,6 +123,7 @@ public class MainStageController implements Initializable {
         movieTitleColoumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         userRatingColoumn.setCellValueFactory(new PropertyValueFactory<>("userRating"));
         IMDBRatingColoumn.setCellValueFactory(new PropertyValueFactory<>("imdbRating"));
+        catMovieColoumn.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
 
         movieLibrary.addAll(logic.getAllMovies());
         categoryLibrary.addAll(logic.getAllCategories());

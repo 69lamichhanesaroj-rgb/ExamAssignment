@@ -12,6 +12,7 @@ import java.util.List;
 
 public class MovieDAO {
     ConnectionManager conMan = new ConnectionManager();
+    CatMovieDAO catMovieDAO = new CatMovieDAO();
 
     public List<Movie> getMovies() {
         List<Movie> movies = new ArrayList<>();
@@ -25,7 +26,7 @@ public class MovieDAO {
                 String filelink = rs.getString("filelink");
                 Date lastview = rs.getDate("lastview");
                 Float userrating = rs.getFloat("userrating");
-                movies.add(new Movie (id, name, rating, userrating, lastview, filelink));
+                movies.add(new Movie (id, name, rating, userrating, lastview, filelink, catMovieDAO.getCatMovies(id)));
             }
         } catch (SQLException e) {
             System.err.println("Error retrieving movies: " + e.getMessage());

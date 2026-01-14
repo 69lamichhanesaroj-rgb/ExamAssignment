@@ -6,11 +6,9 @@ public class CatMovie {
     private String categoryName;
     private String movieName;
 
-    public CatMovie(Integer categoryId, Integer movieId, String categoryName, String movieName) {
+    public CatMovie(Integer categoryId, Integer movieId) {
         this.categoryId = categoryId;
         this.movieId = movieId;
-        this.categoryName = categoryName;
-        this.movieName = movieName;
     }
 
     public Integer getCategoryId() {
