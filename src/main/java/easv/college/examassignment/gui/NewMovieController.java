@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -72,22 +71,31 @@ public class NewMovieController implements Initializable {
 
     public void btnSave(ActionEvent event) {
         if (movieToEdit == null) {
-            //Add new movie "Mode"
-            logic.createMovie(
-                    txtMovieTitle.getText(),
-                    Float.parseFloat(txtIMBDRating.getText()),
-                    txtFilePath.getText(),
-                    new java.sql.Date(System.currentTimeMillis()),
-                    Float.parseFloat(txtUserRating.getText())
-            );
+            int movieId = logic.createMovie(txtMovieTitle.getText(), Float.parseFloat(txtIMBDRating.getText()), txtFilePath.getText(), new java.sql.Date(System.currentTimeMillis()), Float.parseFloat(txtUserRating.getText()));
+            List<ComboBox<Category>> comboBoxes = List.of(cbox1, cbox2, cbox3, cbox4, cbox5);
+            for (ComboBox<Category> cbox : comboBoxes) {
+                Category selectedCategory = cbox.getValue();
+                if (selectedCategory != null) {
+                    logic.createCatMovie(selectedCategory.getId(), movieId);
+                }
+            }
         } else {
-            //Edit a movie 'mode'
             movieToEdit.setName(txtMovieTitle.getText());
             movieToEdit.setImdbRating(Float.parseFloat(txtIMBDRating.getText()));
             movieToEdit.setUserRating(Float.parseFloat(txtUserRating.getText()));
             movieToEdit.setFileLink(txtFilePath.getText());
 
             logic.editMovie(movieToEdit);
+
+            logic.deleteCategoriesFromMovie(movieToEdit.getId());
+
+            List<ComboBox<Category>> comboBoxes = List.of(cbox1, cbox2, cbox3, cbox4, cbox5);
+            for (ComboBox<Category> cbox : comboBoxes) {
+                Category selectedCategory = cbox.getValue();
+                if (selectedCategory != null) {
+                    logic.createCatMovie(selectedCategory.getId(), movieToEdit.getId());
+                }
+            }
         }
         ((Stage) btnCloseWindow.getScene().getWindow()).close();
     }

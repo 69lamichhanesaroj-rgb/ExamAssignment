@@ -9,7 +9,7 @@ import java.util.List;
 public class CatMovieDAO {
     ConnectionManager conMan = new ConnectionManager();
 
-    public String getCatMovies(int movieId) throws SQLServerException {
+    public String getCatMovies(int movieId) {
         try (Connection con = conMan.getConnection())
         {
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM dbo.CatMovie WHERE MovieId = ?");
@@ -29,29 +29,42 @@ public class CatMovieDAO {
             }
             return catNames;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error retrieving categories names for movie: " + e.getMessage());
+            return "";
         }
     }
 
-    public String getMoviesByCategory(int categoryId) throws SQLException {
+    public String getMoviesByCategory(int categoryId) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("SELECT name FROM dbo.Category WHERE id = ?");
             stmt.setInt(1, categoryId);
             ResultSet rs = stmt.executeQuery();
             rs.next();
             return rs.getString("name");
-
+        } catch (SQLException e) {
+            System.err.println("Error retrieving categories names for movie: " + e.getMessage());
+            return "";
         }
     }
 
-    public void addCatMovie(CatMovie catMovie) {
+    public void addCatMovie(int categoryId, int movieId) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("INSERT INTO CatMovie (categoryId, movieId) VALUES (?, ?)");
-            stmt.setInt(1, catMovie.getCategoryId());
-            stmt.setInt(2, catMovie.getMovieId());
+            stmt.setInt(1, categoryId);
+            stmt.setInt(2, movieId);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Error adding CatMovie: " + e.getMessage());
+            System.err.println("Error adding categories to movie: " + e.getMessage());
+        }
+    }
+
+    public void deleteCatMovie(int movieId) {
+        try (Connection con = conMan.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM dbo.CatMovie WHERE movieId = ?");
+            stmt.setInt(1, movieId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error deleting categories form movie: " + e.getMessage());
         }
     }
 }

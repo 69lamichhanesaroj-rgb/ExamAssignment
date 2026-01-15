@@ -31,18 +31,27 @@ public class MovieDAO {
         return movies;
     }
 
-    public void addMovie(String name, Float rating, String fileLink, Date lastView, Float userRating) {
+    public int addMovie(String name, Float rating, String fileLink, Date lastView, Float userRating) {
         try (Connection con = conMan.getConnection()) {
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO Movie (name, rating, fileLink, lastView, userrating) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO Movie (name, rating, fileLink, lastView, userrating) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, name);
             stmt.setFloat(2, rating);
             stmt.setString(3, fileLink);
             stmt.setDate(4, lastView);
             stmt.setFloat(5, userRating);
             stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            else {
+                throw new SQLException("Creating movie failed, no ID obtained.");
+            }
         }
         catch (SQLException e) {
             System.err.println("Error adding movie: " + e.getMessage());
+            return -1;
         }
     }
 

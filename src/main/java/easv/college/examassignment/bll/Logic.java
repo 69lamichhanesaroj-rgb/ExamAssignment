@@ -24,9 +24,17 @@ public class Logic
         return dao.getMovieDAO().getMovies();
     }
 
-    public void createMovie(String name, Float imdbRating, String fileLink, Date lastView, Float userRating)
+    public int createMovie(String name, Float imdbRating, String fileLink, Date lastView, Float userRating)
     {
-        dao.getMovieDAO().addMovie(name, imdbRating, fileLink, lastView, userRating);
+        return dao.getMovieDAO().addMovie(name, imdbRating, fileLink, lastView, userRating);
+    }
+
+    public void createCatMovie(int categoryId, int movieId) {
+        dao.getCatMovieDAO().addCatMovie(categoryId, movieId);
+    }
+
+    public void deleteCategoriesFromMovie(int movieId) {
+        dao.getCatMovieDAO().deleteCatMovie(movieId);
     }
 
     public void deleteMovie(Movie movie) 
@@ -38,6 +46,7 @@ public class Logic
     {
         dao.getMovieDAO().updateMovie(movie);
     }
+
     public void playMovie(Movie movie)
     {
         try
@@ -70,8 +79,7 @@ public class Logic
         dao.getCategoryDAO().deleteCategory(category);
     }
 
-    public List<Category> filterCategory(Category category) 
-    {
+    public List<Category> filterCategory(Category category) {
         // this should accept search text and rating
         // return the movies
         // public List<MovieWithCategories> filterMovies(String searchText, int rating)

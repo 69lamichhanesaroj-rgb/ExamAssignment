@@ -29,8 +29,13 @@ public class ConnectionManager {
             System.err.println("Error connecting to database: " + e.getMessage());
         }
     }
-    public Connection getConnection() throws SQLServerException {
-        return dataSource.getConnection();
+    public Connection getConnection() {
+        try {
+            return dataSource.getConnection();
+        } catch (SQLServerException e) {
+            System.err.println("Error retrieving data from the database: " + e.getMessage());
+            return null;
+        }
     }
 
     // Test method to check if the connection is working
