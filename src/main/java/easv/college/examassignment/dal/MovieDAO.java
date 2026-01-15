@@ -2,10 +2,7 @@ package easv.college.examassignment.dal;
 
 
 import easv.college.examassignment.be.Movie;
-
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

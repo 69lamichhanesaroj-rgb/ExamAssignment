@@ -4,7 +4,6 @@ import easv.college.examassignment.be.Category;
 import easv.college.examassignment.be.Movie;
 import easv.college.examassignment.be.*;
 import easv.college.examassignment.dal.DAOManager;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;

@@ -1,7 +1,6 @@
 package easv.college.examassignment.dal;
 
 import easv.college.examassignment.be.Category;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

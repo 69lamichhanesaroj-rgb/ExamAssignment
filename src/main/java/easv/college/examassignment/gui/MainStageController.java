@@ -31,22 +31,10 @@ public class MainStageController implements Initializable {
     private TableColumn<Movie, Float> IMDBRatingColoumn;
 
     @FXML
-    private Button addCategoryBtn;
-
-    @FXML
-    private Button addEditMovieBtn;
-
-    @FXML
     private TableColumn<CatMovie, Category> catMovieColoumn;
 
     @FXML
     private ListView<Category> categoryList;
-
-    @FXML
-    private Button deleteMovieBtn;
-
-    @FXML
-    private Button deleteCategoryBtn;
 
     @FXML
     private Button closeMainStage;
@@ -58,37 +46,10 @@ public class MainStageController implements Initializable {
     private TableView<Movie> title;
 
     @FXML
-    private RadioButton rating2;
-
-    @FXML
-    private RadioButton rating3;
-
-    @FXML
-    private RadioButton rating4;
-
-    @FXML
-    private RadioButton rating5;
-
-    @FXML
-    private RadioButton rating6;
-
-    @FXML
-    private RadioButton rating7;
-
-    @FXML
-    private RadioButton rating8;
-
-    @FXML
-    private RadioButton rating9;
-
-    @FXML
     private ToggleGroup ratingIMBD;
 
     @FXML
     private TextField searchBox;
-
-    @FXML
-    private Button searchMovie;
 
     @FXML
     private Label warningPopUp;

@@ -2,7 +2,6 @@ package easv.college.examassignment.dal;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import easv.college.examassignment.be.CatMovie;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
