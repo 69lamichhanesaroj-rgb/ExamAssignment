@@ -13,8 +13,7 @@ public class ConnectionManager {
     private static final String Connection = "config/config.settings";
     private SQLServerDataSource dataSource;
 
-    public ConnectionManager()
-    {
+    public ConnectionManager() {
         try {
             Properties databaseProperties = new Properties();
             databaseProperties.load(new FileInputStream(new File(Connection)));
@@ -29,6 +28,7 @@ public class ConnectionManager {
             System.err.println("Error connecting to database: " + e.getMessage());
         }
     }
+
     public Connection getConnection() {
         try {
             return dataSource.getConnection();

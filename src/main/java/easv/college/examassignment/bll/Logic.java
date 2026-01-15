@@ -10,22 +10,18 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
-public class Logic
-{
+public class Logic {
     private final DAOManager dao;
 
-    public Logic()
-    {
+    public Logic() {
         dao = new DAOManager();
     }
 
-    public List<Movie> getAllMovies()
-    {
+    public List<Movie> getAllMovies() {
         return dao.getMovieDAO().getMovies();
     }
 
-    public int createMovie(String name, Float imdbRating, String fileLink, Date lastView, Float userRating)
-    {
+    public int createMovie(String name, Float imdbRating, String fileLink, Date lastView, Float userRating) {
         return dao.getMovieDAO().addMovie(name, imdbRating, fileLink, lastView, userRating);
     }
 
@@ -37,23 +33,19 @@ public class Logic
         dao.getCatMovieDAO().deleteCatMovie(movieId);
     }
 
-    public void deleteMovie(Movie movie) 
-    {
+    public void deleteMovie(Movie movie) {
         dao.getMovieDAO().deleteMovie(movie);
     }
 
-    public void editMovie(Movie movie)
-    {
+    public void editMovie(Movie movie) {
         dao.getMovieDAO().updateMovie(movie);
     }
 
-    public void playMovie(Movie movie)
-    {
-        try
-        {
+    public void playMovie(Movie movie) {
+        try {
             File file = new File(movie.getFileLink());
 
-            if(!file.exists()){
+            if(!file.exists()) {
                 throw new IOException("File not found");
             }
 
@@ -64,38 +56,31 @@ public class Logic
             System.err.println("Error playing movie: " + e.getMessage());
         }
     }
-    public List<Category> getAllCategories()
-    {
+
+    public List<Category> getAllCategories() {
         return dao.getCategoryDAO().getCategories();
     }
 
-    public void createCategory(Category category) 
-    {
+    public void createCategory(Category category) {
         dao.getCategoryDAO().addCategory(category);
     }
 
-    public void deleteCategory(Category category) 
-    {
+    public void deleteCategory(Category category) {
         dao.getCategoryDAO().deleteCategory(category);
     }
 
-    public List<Category> filterCategory(Category category) {
-        // this should accept search text and rating
-        // return the movies
-        // public List<MovieWithCategories> filterMovies(String searchText, int rating)
-        return null;
-    }
-    public List<Movie>filterMovies(String searchText, Float minRating)
-    {
+    public List<Movie>filterMovies(String searchText, Float minRating) {
         List<Movie> movies = dao.getMovieDAO().getMovies();
         return movies.stream().filter(movie -> matchesSearchText(movie,searchText)).filter(movie -> matchesRating(movie,minRating)).toList();
     }
+
     private boolean matchesSearchText (Movie movie, String searchText){
         if(searchText == null || searchText.isBlank()){
             return true;
         }
         return movie.getName().toLowerCase().contains(searchText.toLowerCase());
     }
+
     private boolean matchesRating (Movie movie, Float minRating){
         if (minRating == null){
             return true;

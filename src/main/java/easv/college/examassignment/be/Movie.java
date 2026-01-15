@@ -25,42 +25,55 @@ public class Movie {
         this.id = id;
         this.name = name;
     }
+
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public Float getImdbRating() {
         return imdbRating;
     }
+
     public void setImdbRating(Float imdbRating) {
         this.imdbRating = imdbRating;
     }
+
     public Float getUserRating() {
         return userRating;
     }
+
     public void setUserRating(Float userRating) {
         this.userRating = userRating;
     }
+
     public Date getLastView() {
         return lastView;
     }
+
     public void setLastView(Date lastView) {
         this.lastView = lastView;
     }
+
     public String getFileLink() {
         return fileLink;
     }
+
     public void setFileLink(String fileLink) {
         this.fileLink = fileLink;
     }
+
     public String getCategoryName() {
         return categoryName;
     }
