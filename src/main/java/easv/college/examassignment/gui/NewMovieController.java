@@ -1,6 +1,7 @@
 package easv.college.examassignment.gui;
 
 import easv.college.examassignment.be.Category;
+import easv.college.examassignment.be.Movie;
 import easv.college.examassignment.bll.Logic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,7 @@ import java.util.ResourceBundle;
 public class NewMovieController implements Initializable {
     Logic logic = new Logic();
     private final ObservableList<Category> categories = FXCollections.observableArrayList();
+    private Movie movieToEdit;
 
     @FXML
     private Button btnCloseWindow;
@@ -69,10 +71,35 @@ public class NewMovieController implements Initializable {
     }
 
     public void btnSave(ActionEvent event) {
-        logic.createMovie(txtMovieTitle.getText(), Float.parseFloat(txtIMBDRating.getText()), txtFilePath.getText(), new java.sql.Date(System.currentTimeMillis()), Float.parseFloat(txtUserRating.getText()));
-        logic.getAllMovies();
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+        if (movieToEdit == null) {
+            //Add new movie "Mode"
+            logic.createMovie(
+                    txtMovieTitle.getText(),
+                    Float.parseFloat(txtIMBDRating.getText()),
+                    txtFilePath.getText(),
+                    new java.sql.Date(System.currentTimeMillis()),
+                    Float.parseFloat(txtUserRating.getText())
+            );
+        } else {
+            //Edit a movie 'mode'
+            movieToEdit.setName(txtMovieTitle.getText());
+            movieToEdit.setImdbRating(Float.parseFloat(txtIMBDRating.getText()));
+            movieToEdit.setUserRating(Float.parseFloat(txtUserRating.getText()));
+            movieToEdit.setFileLink(txtFilePath.getText());
+
+            logic.editMovie(movieToEdit);
+        }
+        ((Stage) btnCloseWindow.getScene().getWindow()).close();
+    }
+
+    public void setMovie(Movie movie){
+        this.movieToEdit = movie;
+
+        if(movieToEdit != null){
+            txtMovieTitle.setText(movie.getName());
+            txtIMBDRating.setText(String.valueOf(movie.getImdbRating()));
+            txtUserRating.setText(String.valueOf(movie.getUserRating()));
+            txtFilePath.setText(movie.getFileLink());
+        }
     }
 }

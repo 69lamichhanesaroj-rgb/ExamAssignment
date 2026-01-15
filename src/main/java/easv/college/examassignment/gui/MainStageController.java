@@ -109,10 +109,30 @@ public class MainStageController implements Initializable {
     }
 
     public void addEditMovieActionBtn(ActionEvent event) throws IOException {
+        Movie selectedMovie = title.getSelectionModel().getSelectedItem();
+        openMovieWindow(selectedMovie);
+    }
 
-        openWindow("newAndEditMovie-view.fxml", "Add Movie");
+    private void openMovieWindow(Movie movie) throws IOException {
 
+        FXMLLoader loader = new FXMLLoader(
+                MovieApplication.class.getResource(
+                        "/easv/college/examassignment/newAndEditMovie-view.fxml"
+                )
+        );
 
+        Parent root = loader.load();
+
+        NewMovieController controller = loader.getController();
+        controller.setMovie(movie);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle(movie == null ? "Add Movie" : "Edit Movie");
+        stage.setResizable(false);
+        stage.showAndWait();
+
+        refreshData();
     }
 
     public void deleteMovieActionBtn(ActionEvent event) {
