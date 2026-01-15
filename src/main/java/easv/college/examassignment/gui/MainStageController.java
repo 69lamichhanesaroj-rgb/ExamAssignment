@@ -102,10 +102,7 @@ public class MainStageController implements Initializable {
     }
 
     public void addCategoryActionBtn(ActionEvent event) throws IOException {
-
         openWindow("addCategory-view.fxml", "Add Category");
-
-
     }
 
     public void addEditMovieActionBtn(ActionEvent event) throws IOException {
@@ -239,38 +236,31 @@ public class MainStageController implements Initializable {
         });
     }
 
-    private void unwantedMovies()
-    {
-        for (Movie movie : movieLibrary)
-        {
-            if (movie.getUserRating() <= 6)
-            {
+    private void unwantedMovies() {
+        for (Movie movie : movieLibrary) {
+            if (movie.getUserRating() <= 6) {
                 showAlert("You have movies with a score of 6 or lower");
             }
         }
     }
 
-    private void unwatchedMovies()
-    {
+    private void unwatchedMovies() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.YEAR, -2);
         Date twoYearsAgo = calendar.getTime();
 
         boolean foundUnwatched = false;
 
-        for (Movie movie : movieLibrary)
-        {
+        for (Movie movie : movieLibrary) {
             java.sql.Date lastView = movie.getLastView();
 
-            if (lastView != null && lastView.before(twoYearsAgo))
-            {
+            if (lastView != null && lastView.before(twoYearsAgo)) {
                 foundUnwatched = true;
                 break;
             }
         }
 
-        if (foundUnwatched)
-        {
+        if (foundUnwatched) {
             showAlert("You have movies you haven't watched for two years");
         }
     }
