@@ -177,16 +177,20 @@ public class MainStageController implements Initializable {
             warningPopUp.setText("Are you sure you want to delete " + selectedCategory.getName() + " ?");
             categoryToDelete = selectedCategory;
         } else if (Objects.equals(categoryToDelete, selectedCategory)) {
-            categoryLibrary.remove(selectedCategory);
-            logic.deleteCategory(selectedCategory);
-            categoryList.getSelectionModel().clearSelection();
-            warningPopUp.setText(" Category Deleted! ");
-            categoryToDelete = null;
+        boolean deleted = logic.deleteCategory(selectedCategory);
+        if (!deleted) {
+            warningPopUp.setText("Cannot delete category - it is being used by one or more movies");
         } else {
-            warningPopUp.setText("Are you sure you want to delete " + selectedCategory.getName() + " ?");
-            categoryToDelete = selectedCategory;
+            categoryLibrary.remove(selectedCategory);
+            categoryList.getSelectionModel().clearSelection();
+            warningPopUp.setText("Category deleted successfully");
         }
+        categoryToDelete = null;
+    } else {
+        warningPopUp.setText("Are you sure you want to delete " + selectedCategory.getName() + " ?");
+        categoryToDelete = selectedCategory;
     }
+}
 
 
     private void openWindow(String fxmlFileName, String windowTitle) throws IOException {

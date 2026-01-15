@@ -36,13 +36,15 @@ public class CategoryDAO {
         }
     }
 
-    public void deleteCategory(Category category) {
+    public boolean deleteCategory(Category category) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("DELETE Category WHERE id = ?");
             stmt.setInt(1, category.getId());
-            stmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             System.err.println("Error deleting category: " + e.getMessage());
+            return false;
         }
     }
 }

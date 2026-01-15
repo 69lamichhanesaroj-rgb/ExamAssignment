@@ -1,5 +1,6 @@
 package easv.college.examassignment.dal;
 
+import easv.college.examassignment.be.Category;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,22 @@ public class CatMovieDAO {
         }
     }
 
+    public List<Category> getCategoriesForMovie(int movieId) {
+        try (Connection con = conMan.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement("SELECT c.id, c.name FROM dbo.CatMovie cm JOIN dbo.Category c ON cm.categoryId = c.id WHERE cm.movieId = ? ");
+            stmt.setInt(1, movieId);
+            ResultSet rs = stmt.executeQuery();
+            List<Category> categories = new ArrayList<>();
+            while (rs.next()) {
+                categories.add(new Category(rs.getInt("id"), rs.getString("name")));
+            }
+            return categories;
+        } catch (SQLException e) {
+            System.err.println("Error retrieving categories for combo boxes for movie: " + e.getMessage());
+            return null;
+        }
+    }
+
     public void addCatMovie(int categoryId, int movieId) {
         try (Connection con = conMan.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("INSERT INTO CatMovie (categoryId, movieId) VALUES (?, ?)");
@@ -63,6 +80,21 @@ public class CatMovieDAO {
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error deleting categories form movie: " + e.getMessage());
+        }
+    }
+
+    public boolean isCategoryInUse(int categoryId) {
+        try (Connection con = conMan.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) as count FROM dbo.CatMovie WHERE categoryId = ?");
+            stmt.setInt(1, categoryId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("count") > 0;
+            }
+            return false;
+        } catch (SQLException e) {
+            System.err.println("Error checking if category is in use: " + e.getMessage());
+            return true;
         }
     }
 }

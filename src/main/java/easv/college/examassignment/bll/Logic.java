@@ -33,7 +33,12 @@ public class Logic {
         dao.getCatMovieDAO().deleteCatMovie(movieId);
     }
 
+    public List<Category> getCategoriesForMovie(int movieId) {
+        return dao.getCatMovieDAO().getCategoriesForMovie(movieId);
+    }
+
     public void deleteMovie(Movie movie) {
+        dao.getCatMovieDAO().deleteCatMovie(movie.getId());
         dao.getMovieDAO().deleteMovie(movie);
     }
 
@@ -65,8 +70,11 @@ public class Logic {
         dao.getCategoryDAO().addCategory(category);
     }
 
-    public void deleteCategory(Category category) {
-        dao.getCategoryDAO().deleteCategory(category);
+    public boolean deleteCategory(Category category) {
+        if (dao.getCatMovieDAO().isCategoryInUse(category.getId())) {
+            return false;
+        }
+        return dao.getCategoryDAO().deleteCategory(category);
     }
 
     public List<Movie>filterMovies(String searchText, Float minRating) {

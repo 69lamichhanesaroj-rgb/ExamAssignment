@@ -48,6 +48,8 @@ public class NewMovieController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<Category> categories1 = logic.getAllCategories();
+        Category noneCategory = new Category(-1, "None");
+        categories.add(noneCategory);
         categories.addAll(categories1);
         cbox1.setItems(categories);
         cbox2.setItems(categories);
@@ -76,7 +78,7 @@ public class NewMovieController implements Initializable {
             List<ComboBox<Category>> comboBoxes = List.of(cbox1, cbox2, cbox3, cbox4, cbox5);
             for (ComboBox<Category> cbox : comboBoxes) {
                 Category selectedCategory = cbox.getValue();
-                if (selectedCategory != null) {
+                if (selectedCategory != null && selectedCategory.getId() != -1) {
                     logic.createCatMovie(selectedCategory.getId(), movieId);
                 }
             }
@@ -93,7 +95,7 @@ public class NewMovieController implements Initializable {
             List<ComboBox<Category>> comboBoxes = List.of(cbox1, cbox2, cbox3, cbox4, cbox5);
             for (ComboBox<Category> cbox : comboBoxes) {
                 Category selectedCategory = cbox.getValue();
-                if (selectedCategory != null) {
+                if (selectedCategory != null && selectedCategory.getId() != -1) {
                     logic.createCatMovie(selectedCategory.getId(), movieToEdit.getId());
                 }
             }
@@ -109,6 +111,13 @@ public class NewMovieController implements Initializable {
             txtIMBDRating.setText(String.valueOf(movie.getImdbRating()));
             txtUserRating.setText(String.valueOf(movie.getUserRating()));
             txtFilePath.setText(movie.getFileLink());
+
+            List<Category> categories = logic.getCategoriesForMovie(movie.getId());
+            List<ComboBox<Category>> comboBoxes = List.of(cbox1, cbox2, cbox3, cbox4, cbox5);
+
+            for (int i = 0; i < categories.size(); i++) {
+                comboBoxes.get(i).setValue(categories.get(i));
+            }
         }
     }
 }
