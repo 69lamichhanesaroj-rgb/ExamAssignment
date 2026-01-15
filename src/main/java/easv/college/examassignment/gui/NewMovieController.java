@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -72,7 +71,7 @@ public class NewMovieController implements Initializable {
 
     public void btnSave(ActionEvent event) {
         if (movieToEdit == null) {
-            //Add new movie "Mode"
+            //Add new movie 'mode'
             logic.createMovie(
                     txtMovieTitle.getText(),
                     Float.parseFloat(txtIMBDRating.getText()),

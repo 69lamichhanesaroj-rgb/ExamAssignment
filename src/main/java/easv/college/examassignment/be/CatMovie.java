@@ -35,19 +35,4 @@ public class CatMovie {
     public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
-
-    /* This part might be usable once we start working on the filter stuff, ofc depending on how we do it
-    @Override
-    public boolean filterEquals(Object object) {
-        if (this == object) return true;
-        if (!(object instanceof CatMovie catMovie)) return false;
-        return Objects.equals(id, catMovie.id);
-    }
-
-     @Override
-    public String toString() {
-        return (insert whatever we need)
-    }
-
-    */
 }
