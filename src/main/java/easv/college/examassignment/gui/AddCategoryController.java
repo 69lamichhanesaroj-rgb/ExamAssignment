@@ -36,6 +36,5 @@ public class AddCategoryController {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
-
     }
 }
