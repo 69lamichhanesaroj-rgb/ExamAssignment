@@ -37,12 +37,4 @@ public class ConnectionManager {
             return null;
         }
     }
-
-    // Test method to check if the connection is working
-//    public static void main(String[] args) throws Exception {
-//        ConnectionManager databaseConnector = new ConnectionManager();
-//        try (Connection connection = databaseConnector.getConnection()) {
-//            System.out.println("Is it open? " + !connection.isClosed());
-//        }
-//    }
 }
